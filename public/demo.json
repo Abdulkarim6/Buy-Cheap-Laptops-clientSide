@@ -1,16 +1,88 @@
 [
     {
-        "_id": "1",
+        "id": "lenovo",
+        "name": "Lenovo Yoga",
+        "image": "https://i.ibb.co/VvF1G2b/lenovo-1.jpg",
+        "location": "Dhaka,Dhanmondi",
+        "recelPrice": "25000",
+        "originalPrice": "40000",
+        "usedTime": "6 Month",
+        "postDate": "11/24/2022",
+        "sellerName": "Kamal Hossen",
+        "role": "seller"
+    },
+    {
+        "id": "lenovo",
+        "name": "Lenovo ThinkBook",
+        "image": "https://i.ibb.co/vCFP7jg/lenovo-2.jpg",
+        "location": "Dhaka,Uttara",
+        "recelPrice": "20000",
+        "originalPrice": "30000",
+        "usedTime": "8 Month",
+        "postDate": "11/24/2022",
+        "sellerName": "Kamal Hossen",
+        "role": "seller"
+    },
+    {
+        "id": "asus",
+        "name": "Asus zenBook",
+        "image": "https://i.ibb.co/ryHtbc7/asus-1.jpg",
+        "location": "Dhaka,Jigatola",
+        "recelPrice": "23000",
+        "originalPrice": "35000",
+        "usedTime": "7 Month",
+        "postDate": "11/24/2022",
+        "sellerName": "Kamal Hossen",
+        "role": "seller"
+    },
+    {
+        "id": "asus",
+        "name": "Asus vivoBooks",
+        "image": "https://i.ibb.co/y8Q2Mb0/asus-2.jpg",
+        "location": "Dhaka,Uttara",
+        "recelPrice": "24000",
+        "originalPrice": "32000",
+        "usedTime": "9 Month",
+        "postDate": "11/24/2022",
+        "sellerName": "Kamal Hossen",
+        "role": "seller"
+    },
+    {
+        "id": "samsung",
+        "name": "Samsung galaxy Book",
+        "image": "https://i.ibb.co/kXMnyYD/samsung-1.jpg",
+        "location": "Dhaka,Uttara",
+        "recelPrice": "26000",
+        "originalPrice": "35000",
+        "usedTime": "6 Month",
+        "postDate": "11/24/2022",
+        "sellerName": "Kamal Hossen",
+        "role": "seller"
+    },
+    {
+        "id": "samsung",
+        "name": "Samsung Book",
+        "image": "https://i.ibb.co/wgZSKZv/samsung-4.jpg",
+        "location": "Dhaka,Uttara",
+        "recelPrice": "22000",
+        "originalPrice": "37000",
+        "usedTime": "1 years",
+        "postDate": "11/24/2022",
+        "sellerName": "Kamal Hossen",
+        "role": "seller"
+    },
+    {
+        "id": "lenovo",
         "name": "Lenovo",
         "image": "https://i.ibb.co/Rj0ZWL3/lenove-3.jpg"
     },
     {
-        "_id": "2",
+        "id": "asus",
         "name": "Asus",
         "image": "https://i.ibb.co/ryHtbc7/asus-1.jpg"
     },
     {
-        "_id": "3",
+        "id": "samsung",
         "name": "Samsung",
         "image": "https://i.ibb.co/kXMnyYD/samsung-1.jpg"
     }

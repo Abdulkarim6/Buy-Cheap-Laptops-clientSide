@@ -3,7 +3,7 @@ import React from 'react';
 
 const Banner = () => {
     return (
-        <div className="hero min-h-screen mt-3 mx-auto rounded bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url("https://i.ibb.co/ZfmLChD/banner.jpg")` }}>
+        <div className="hero min-h-screen mt-3 mx-auto rounded bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url("https://i.ibb.co/28p1W43/banner.jpg")` }}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-md">
