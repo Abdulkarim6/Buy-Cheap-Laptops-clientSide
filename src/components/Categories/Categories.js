@@ -15,7 +15,7 @@ const Categories = () => {
     })
 
     return (
-        <div>
+        <div className=' bg-base-200 text-base-content'>
             <h1 className="text-3xl font-bold underline">
                 this is Categories
             </h1>

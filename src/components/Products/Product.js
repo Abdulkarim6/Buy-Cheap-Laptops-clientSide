@@ -22,8 +22,7 @@ const Product = ({ product }) => {
                     <p>used Time : {usedTime}</p>
                 </div>
                 <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                    <button className="btn btn-primary">Book Now</button>
                 </div>
             </div>
         </div>
