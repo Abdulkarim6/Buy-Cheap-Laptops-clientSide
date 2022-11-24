@@ -1,0 +1,17 @@
+[
+    {
+        "_id": "1",
+        "name": "Lenovo",
+        "image": "https://i.ibb.co/Rj0ZWL3/lenove-3.jpg"
+    },
+    {
+        "_id": "2",
+        "name": "Asus",
+        "image": "https://i.ibb.co/ryHtbc7/asus-1.jpg"
+    },
+    {
+        "_id": "3",
+        "name": "Samsung",
+        "image": "https://i.ibb.co/kXMnyYD/samsung-1.jpg"
+    }
+]
