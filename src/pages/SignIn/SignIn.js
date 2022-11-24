@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 
 const SignIn = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate()
 
     const { signIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
@@ -17,7 +18,8 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast.success(`${user.displayName} Login Successfully`)
+                toast.success(`${user.displayName} Login Successfully`);
+                navigate('/')
             })
             .catch(error => {
                 setLoginError(error.message)
@@ -52,7 +54,7 @@ const SignIn = () => {
                     }
                     <input type="submit" className='btn btn-accent w-full' value='Login' />
                 </form>
-                <p>New to doctors portal <Link to='/signup' className='text-secondary'>create new account</Link> </p>
+                <p>If you are new this site!<Link to='/signup' className='text-secondary'>create new account</Link> </p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
