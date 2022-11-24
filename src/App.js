@@ -2,21 +2,20 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // const current = new Date();
+  // const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  // console.log(date);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>
+          Hello world!
+        </h1>
+        <button className="btn btn-info">Info</button>
+        <button className="btn btn-success">Success</button>
+        <button className="btn btn-warning">Warning</button>
+        <button className="btn btn-error">Error</button>
       </header>
     </div>
   );
