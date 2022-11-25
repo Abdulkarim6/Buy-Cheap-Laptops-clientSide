@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
+
+const provider = new GoogleAuthProvider();
 
 const SignIn = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, signInGoogle } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
     const location = useLocation();
@@ -27,8 +30,18 @@ const SignIn = () => {
             .catch(error => {
                 setLoginError(error.message)
                 console.log(error)
-            })
+            });
     }
+
+    const handleGoogleSingIn = () => {
+        signInGoogle(provider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(err => console.log(err))
+    };
+
     return (
         <div className='h-[500px] flex justify-center items-center'>
             <div className='w-96 borderd'>
@@ -59,7 +72,7 @@ const SignIn = () => {
                 </form>
                 <p>If you are new this site!<Link to='/signup' className='text-secondary'>create new account</Link> </p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSingIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
