@@ -26,6 +26,7 @@ const Products = () => {
                 bookingProduct &&
                 <BookingModal
                     bookingProduct={bookingProduct}
+                    setBookingProduct={setBookingProduct}
                 >
                 </BookingModal>
             }

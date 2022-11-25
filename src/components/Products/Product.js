@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Product = ({ product, setBookingProduct }) => {
-    // console.log(product);
+    console.log(product);
 
     const { id, image, location, name, originalPrice, postDate, recelPrice, role, sellerName, usedTime, _id } = product;
 
