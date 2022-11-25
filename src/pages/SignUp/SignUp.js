@@ -11,14 +11,14 @@ const SignUP = () => {
 
 
     const handleSignup = data => {
-        const { name, email, password, userTag } = data;
+        const { name, email, password, role } = data;
         setSignupError('')
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 toast.success('user create successfully')
-                handleUserUpdate(name, email, userTag)
+                handleUserUpdate(name, email, role)
             })
             .catch(err => {
                 setSignupError(err.message)
@@ -26,12 +26,30 @@ const SignUP = () => {
             })
     };
 
-    const handleUserUpdate = (name, userTag) => {
-        const profile = { displayName: name, role: userTag }
+    const handleUserUpdate = (name, email, role) => {
+        const profile = { displayName: name }
         updateUser(profile)
             .then(() => {
+                saveUserData(name, email, role)
             })
             .catch(err => console.log(err));
+    };
+
+    const saveUserData = (name, email, role) => {
+        const user = { name, email, role };
+        console.log(user);
+
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            });
     };
 
 
@@ -52,7 +70,7 @@ const SignUP = () => {
                     </div>
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Email</span></label>
-                        <select {...register("userTag", { required: 'usertag is required' })} className="select select-ghost input-bordered w-full">
+                        <select {...register("role", { required: 'usertag is required' })} className="select select-ghost input-bordered w-full">
                             <option disabled selected className='text-xl'>select a option You buyer or seller</option>
                             <option className='text-xl my-3' >Seller</option>
                             <option className='text-xl'>Buyer</option>
