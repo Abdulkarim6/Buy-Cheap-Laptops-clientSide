@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
@@ -25,7 +27,7 @@ const AddProduct = () => {
     // console.log(productCategorys);
 
     const handleAddProduct = data => {
-        console.log('data', data);
+        // console.log('data', data);
 
         const image = data.image[0];
         const formData = new FormData();
@@ -71,6 +73,7 @@ const AddProduct = () => {
                         console.log(result);
                         if (result.acknowledged) {
                             toast.success(`${user?.displayName} added Product successfully`);
+                            navigate('/dashboard')
                         }
                     })
             });

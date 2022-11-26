@@ -1,14 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom'
+import ConfirmationModal from '../../../shared/ConfirmationModal/ConfirmationModal';
 
 const MyProducts = () => {
+    const [deletingProduct, setDeletingProduct] = useState(null);
+
+    const closeModal = () => {
+        setDeletingProduct(null)
+    };
+
     const { user } = useContext(AuthContext);
 
     const url = (`http://localhost:5000/products?email=${user?.email}`)
 
-    const { data: products = [] } = useQuery({
+    const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
@@ -17,52 +25,82 @@ const MyProducts = () => {
             return data;
         }
     })
-    const { Condition, Description, Phone, email, id, image, location, originalPrice,
-        postDate, recelPrice, role, sellerName, title, usedTime } = products;
+    // const { Condition, Description, Phone, email, id, image, location, originalPrice,
+    //     postDate, recelPrice, role, sellerName, title, usedTime } = products;
     // console.log(products);
 
+    const successDeleteAction = product => {
+        fetch(`http://localhost:5000/product/${product._id}`, {
+            method: 'DELETE',
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+            // }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success(`${product.title} product deleted successfully`)
+                    refetch()
+                }
+            })
+    }
+
     return (
-        <div className="overflow-x-auto w-full">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Product Name</th>
-                        <th>product status</th>
-                        <th>Advertise</th>
-                        <th>Delete</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        products.map((product, i) =>
-                            <tr key={product._id}>
-                                <th>{i + 1}</th>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="w-20 rounded">
-                                                <img src={product.image} alt="Tailwind-CSS-Avatar-component" />
+        <div>
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product Photo and Name</th>
+                            <th>product status</th>
+                            <th>Advertise</th>
+                            <th>Delete</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            products.map((product, i) =>
+                                <tr key={product._id}>
+                                    <th>{i + 1}</th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="w-20 rounded">
+                                                    <img src={product.image} alt="Tailwind-CSS-Avatar-component" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold">{product.title}</div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="font-bold">{product.title}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                                </td>
-                                <td>advertise</td>
-                                <th>
-                                    <button className="btn btn-ghost btn-xs">Delete</button>
-                                </th>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
+                                    </td>
+                                    <td>
+                                        <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                                    </td>
+                                    <td>advertise</td>
+                                    <th>
+                                        <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-madal" className="btn btn-sm btn-error">Delete</label>
+                                    </th>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
+            {
+                deletingProduct &&
+                <ConfirmationModal
+                    title={`Are you sure you want to delete?`}
+                    message={`if you delete ${deletingProduct.title}. It connot be undone`}
+                    successDeleteAction={successDeleteAction}
+                    successDeleteButton='delete'
+                    modalData={deletingProduct}
+                    closeModal={closeModal}
+                ></ConfirmationModal>
+            }
         </div>
     );
 };
