@@ -19,7 +19,7 @@ const MyProducts = () => {
     })
     const { Condition, Description, Phone, email, id, image, location, originalPrice,
         postDate, recelPrice, role, sellerName, title, usedTime } = products;
-    console.log(products);
+    // console.log(products);
 
     return (
         <div className="overflow-x-auto w-full">

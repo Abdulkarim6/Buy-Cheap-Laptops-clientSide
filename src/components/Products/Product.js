@@ -8,7 +8,7 @@ const Product = ({ product, setBookingProduct }) => {
 
     return (
         <div className="card bg-base-100 shadow-xl">
-            <figure><img src={image} className='h-56' alt="Shoes" /></figure>
+            <figure><img src={image} className='h-56' alt="" /></figure>
             <div className="card-body">
                 <h2 className="card-title text-3xl">
                     {title}
