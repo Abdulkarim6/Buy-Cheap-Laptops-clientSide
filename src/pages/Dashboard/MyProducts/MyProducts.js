@@ -13,7 +13,7 @@ const MyProducts = () => {
     };
 
     const { user } = useContext(AuthContext);
-
+    /* loaded all My products start here */
     const url = (`http://localhost:5000/products?email=${user?.email}`)
 
     const { data: products = [], refetch } = useQuery({
@@ -27,8 +27,10 @@ const MyProducts = () => {
     })
     // const { Condition, Description, Phone, email, id, image, location, originalPrice,
     //     postDate, recelPrice, role, sellerName, title, usedTime } = products;
-    // console.log(products);
+    /* loaded all My products End Here */
 
+
+    /* Delete My products operation start here  */
     const successDeleteAction = product => {
         fetch(`http://localhost:5000/product/${product._id}`, {
             method: 'DELETE',
@@ -42,6 +44,26 @@ const MyProducts = () => {
                 if (data.acknowledged) {
                     toast.success(`${product.title} product deleted successfully`)
                     refetch()
+                }
+            })
+    };
+    /* Delete My products operation End here  */
+
+    /* Advertise My products operation start here  */
+    const handleAdvertiseProduct = product => {
+        console.log(product);
+        fetch('http://localhost:5000/advertiseProduct', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                if (result.acknowledged) {
+                    toast.success(`${product.title} advertised successfully`);
                 }
             })
     }
@@ -80,7 +102,7 @@ const MyProducts = () => {
                                     <td>
                                         <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
                                     </td>
-                                    <td>advertise</td>
+                                    <td><label onClick={() => handleAdvertiseProduct(product)} className="btn btn-sm btn-primary">advertise</label></td>
                                     <th>
                                         <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-madal" className="btn btn-sm btn-error">Delete</label>
                                     </th>
