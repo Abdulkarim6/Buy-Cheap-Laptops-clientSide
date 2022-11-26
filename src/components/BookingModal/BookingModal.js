@@ -7,7 +7,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const { user } = useContext(AuthContext);
-    console.log(user, bookingProduct);
+    // console.log(user, bookingProduct);
 
     const handleBooking = event => {
         event.preventDefault();
