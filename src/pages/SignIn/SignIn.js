@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import { GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../../hooks/useToken';
 
 const provider = new GoogleAuthProvider();
 
@@ -13,9 +14,17 @@ const SignIn = () => {
     const { signIn, signInGoogle } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
+    const [loginUserEmail, setLoginUserEmail] = useState('')
+    const [token] = useToken(loginUserEmail)
+
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
+
 
     const handleLogin = data => {
         // console.log(data);
@@ -25,7 +34,7 @@ const SignIn = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success(`${user.displayName} Login Successfully`);
-                navigate(from, { replace: true });
+                setLoginUserEmail(data.email)
             })
             .catch(error => {
                 setLoginError(error.message)

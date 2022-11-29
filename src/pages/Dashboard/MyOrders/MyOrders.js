@@ -50,7 +50,7 @@ const MyOrders = () => {
                                         </div>
                                     </td>
                                     <td>
-                                        <span>{myOrderProduct.price}</span>bookingDate
+                                        <span>{myOrderProduct.price}</span>
                                     </td>
                                     <td><span>{myOrderProduct.bookingDate}</span></td>
                                     <th>

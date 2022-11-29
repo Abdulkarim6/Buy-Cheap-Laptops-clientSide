@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import { GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../../hooks/useToken';
 
 const provider = new GoogleAuthProvider();
 
@@ -11,30 +12,55 @@ const SignUP = () => {
     const { createUser, updateUser, signInGoogle } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signupError, setSignupError] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const imageHostKey = process.env.REACT_APP_imagebb_key;
+
+    const [newUserEmail, setNewUserEmail] = useState('');
+    const [token] = useToken(newUserEmail);
+
+    if (token) {
+        navigate('/')
+    }
 
 
     const handleSignup = data => {
-        const { name, email, password, role } = data;
-        setSignupError('')
-        createUser(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                toast.success('user create successfully')
-                handleUserUpdate(name, email, role)
-            })
-            .catch(err => {
-                setSignupError(err.message)
-                console.error(err)
-            })
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imageData => {
+                const imgUrl = imageData.data.url;
+                console.log(imgUrl);
+
+                const { name, email, password, role } = data;
+                setSignupError('')
+                createUser(email, password)
+                    .then(result => {
+                        const user = result.user;
+                        console.log(user);
+                        toast.success('user create successfully')
+                        handleUserUpdate(name, email, role, imgUrl)
+                    })
+                    .catch(err => {
+                        setSignupError(err.message)
+                        console.error(err)
+                    })
+            });
+
+
     };
 
-    const handleUserUpdate = (name, email, role) => {
+    const handleUserUpdate = (name, email, role, imgUrl) => {
         const profile = { displayName: name }
         updateUser(profile)
             .then(() => {
-                saveUserData(name, email, role)
+                saveUserData(name, email, role, imgUrl)
             })
             .catch(err => console.log(err));
     };
@@ -48,8 +74,8 @@ const SignUP = () => {
             .catch(err => console.log(err))
     };
 
-    const saveUserData = (name, email, role) => {
-        const user = { name, email, role };
+    const saveUserData = (name, email, role, imgUrl) => {
+        const user = { name, email, role, imgUrl };
         console.log(user);
 
         fetch('http://localhost:5000/users', {
@@ -62,7 +88,7 @@ const SignUP = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                navigate('/')
+                setNewUserEmail(email);
             });
     };
 
@@ -97,6 +123,11 @@ const SignUP = () => {
                             minLength: { value: 6, message: 'password must be 6 charecters long' },
                         })} placeholder="Your Password" className="input input-bordered w-full" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
+                    </div>
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Product Photo</span></label>
+                        <input type="file" {...register("image", { required: 'file is Required' })} className="file-input file-input-bordered file-input-primary w-full " placeholder="Your Photo" />
+                        {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
                     </div>
                     <input type="submit" className='btn btn-accent w-full' value='SignUp' />
                 </form>
