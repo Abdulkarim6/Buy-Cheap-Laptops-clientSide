@@ -2,8 +2,8 @@ import React from 'react';
 
 const AdvertisedCard = ({ advertiseProduct }) => {
 
-    const { id, image, location, title, originalPrice, postDate,
-        recelPrice, role, sellerName, usedTime, _id, Phone, Condition, Description } = advertiseProduct;
+    const { image, location, title, originalPrice, postDate,
+        recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = advertiseProduct;
 
     return (
         

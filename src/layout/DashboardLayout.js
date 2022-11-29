@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from '../Contexts/AuthProvider';
+import useAdmin from '../hooks/useAdmin';
+import useSeller from '../hooks/useSeller';
 import Footer from '../shared/Footer/Footer';
 import Navbar from '../shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
+    const [isSeller] = useSeller(user?.email)
 
     return (
         <div>
@@ -23,14 +27,24 @@ const DashboardLayout = () => {
                 <div className="drawer-side">
                     <label htmlFor="Dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 text-base-content">
-
-                        <li><Link to='/dashboard/addOrders'>My Orders-Buyer</Link></li>
-                        <li><Link to="/dashboard">My Products-seller</Link></li>
-                        <li><Link to="/dashboard/addProduct">Add A Product-seller</Link></li>
-                        <li><Link to="/dashboard/allSellers">All Selers-admin</Link></li>
-                        <li><Link to='/dashboard/allBuyers'>All Buyers-admin</Link></li>
-                        <li><Link >Reported Items-admin</Link></li>
-                        <p>check@gmail.com</p>
+                        {
+                            !isAdmin && !isSeller && <>
+                                <li><Link to='/dashboard'>My Orders-Buyer</Link></li>
+                            </>
+                        }
+                        {
+                            isSeller && <>
+                                <li><Link to="/dashboard/myProducts">My Products-seller</Link></li>
+                                <li><Link to="/dashboard/addProduct">Add A Product-seller</Link></li>
+                            </>
+                        }
+                        {
+                            isAdmin && <>
+                                <li><Link to="/dashboard/allSellers">All Selers-admin</Link></li>
+                                <li><Link to='/dashboard/allBuyers'>All Buyers-admin</Link></li>
+                                <li><Link >Reported Items-admin</Link></li>
+                            </>
+                        }
 
 
                     </ul>

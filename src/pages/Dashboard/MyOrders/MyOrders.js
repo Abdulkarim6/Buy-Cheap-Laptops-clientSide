@@ -7,7 +7,7 @@ const MyOrders = () => {
     /* loaded all My products start here */
     const url = (`http://localhost:5000/myOrderProducts?email=${user?.email}`)
 
-    const { data: myOrderProducts = [], refetch } = useQuery({
+    const { data: myOrderProducts = [] } = useQuery({
         queryKey: ['myOrderProducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
