@@ -1,4 +1,5 @@
 import React from 'react';
+import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 
 const AdvertisedCard = ({ advertiseProduct }) => {
 
@@ -12,13 +13,15 @@ const AdvertisedCard = ({ advertiseProduct }) => {
                 <div className="card-body">
                     <h2 className="card-title text-3xl">
                         {title}
-                        <div className="badge badge-secondary">NEW</div>
                     </h2>
                     <div>
                         <div className='flex justify-between'>
                             <div className='text-semibold'>
+                            <h2 className="card-title text-xl">
+                                <p>Seller name : {sellerName} </p>
+                                <CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon>
+                            </h2>
                                 <strong><p>Sell Price : {recelPrice}</p></strong>
-                                <strong><p>Seller name : {sellerName}</p></strong>
                                 <p>Location : {location}</p>
                                 <p>Phone : {Phone}</p>
                             </div>

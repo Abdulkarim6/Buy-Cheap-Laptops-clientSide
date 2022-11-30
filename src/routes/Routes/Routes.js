@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blog from "../../components/Blog/Blog";
+import DisplayError from "../../components/DisplayError/DisplayError";
 import Products from "../../components/Products/Products";
 import DashboardLayout from "../../layout/DashboardLayout";
 import Main from "../../layout/Main";
@@ -17,8 +19,10 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 const router = createBrowserRouter([
     {
         path: '/', element: <Main></Main>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             { path: '/', element: <Home></Home> },
+            { path: '/blog', element: <Blog></Blog> },
             {
                 path: '/products/:id', element: <PrivateRoute><Products></Products></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
@@ -33,6 +37,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard', element: <DashboardLayout></DashboardLayout>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                 path: '/dashboard', element: <MyOrders></MyOrders>
@@ -43,7 +48,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/addProduct', element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
-            
+
             {
                 path: '/dashboard/allSellers', element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },

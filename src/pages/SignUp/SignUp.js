@@ -3,13 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
-import { GoogleAuthProvider } from 'firebase/auth';
 import useToken from '../../hooks/useToken';
 
-const provider = new GoogleAuthProvider();
 
 const SignUP = () => {
-    const { createUser, updateUser, signInGoogle } = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signupError, setSignupError] = useState('');
     const navigate = useNavigate();
@@ -28,9 +26,8 @@ const SignUP = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 toast.success('user create successfully')
-                // handleUserUpdate(name, email, role)
                 saveUserData(name, email, role)
             })
             .catch(err => {
@@ -39,27 +36,9 @@ const SignUP = () => {
             })
     };
 
-    // const handleUserUpdate = (name, email, role) => {
-    //     const profile = { displayName: name }
-    //     updateUser(profile)
-    //         .then(() => {
-    //             saveUserData(name, email, role)
-    //         })
-    //         .catch(err => console.log(err));
-    // };
-
-    const handleGoogleSingUP = () => {
-        signInGoogle(provider)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-            })
-            .catch(err => console.log(err))
-    };
-
     const saveUserData = (name, email, role) => {
         const user = { name, email, role };
-        console.log(user);
+        // console.log(user);
 
         fetch('http://localhost:5000/users', {
             method: 'POST',
@@ -70,7 +49,7 @@ const SignUP = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setNewUserEmail(email);
             });
     };
@@ -113,8 +92,7 @@ const SignUP = () => {
                     signupError && <p className='text-red-500'>{signupError}</p>
                 }
                 <p>Allready have an account <Link to='/signin' className='text-secondary'>Please Login</Link> </p>
-                <div className="divider">OR</div>
-                <button onClick={handleGoogleSingUP} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                
             </div>
         </div>
     );

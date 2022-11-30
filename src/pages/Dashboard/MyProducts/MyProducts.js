@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom'
 import ConfirmationModal from '../../../shared/ConfirmationModal/ConfirmationModal';
 
 const MyProducts = () => {
@@ -29,8 +28,6 @@ const MyProducts = () => {
             return data;
         }
     })
-    // const { Condition, Description, Phone, email, id, image, location, originalPrice,
-    //     postDate, recelPrice, role, sellerName, title, usedTime } = products;
     /* loaded all My products End Here */
 
 
@@ -44,7 +41,7 @@ const MyProducts = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.acknowledged) {
                     toast.success(`${product.title} product deleted successfully`)
                     refetch()
@@ -55,7 +52,7 @@ const MyProducts = () => {
 
     /* Advertise My products operation start here  */
     const handleAdvertiseProduct = product => {
-        console.log(product);
+        // console.log(product);
         fetch('http://localhost:5000/advertiseProduct', {
             method: 'POST',
             headers: {
@@ -65,7 +62,7 @@ const MyProducts = () => {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result);
+                // console.log(result);
                 if (result.acknowledged) {
                     toast.success(`${product.title} advertised successfully`);
                 }

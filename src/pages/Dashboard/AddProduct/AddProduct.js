@@ -12,7 +12,7 @@ const AddProduct = () => {
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const imageHostKey = process.env.REACT_APP_imagebb_key;
     const { user } = useContext(AuthContext);
-    console.log('user', user?.displayName, user?.email, date);
+    // console.log('user', user?.displayName, user?.email, date);
 
     //for get productCategorys from database
     const { data: productCategorys = [], isLoading } = useQuery({
@@ -40,7 +40,7 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(imageData => {
-                console.log(imageData.data.url);
+                // console.log(imageData.data.url);
 
                 const addedProduct = {
                     sellerName: user?.displayName,
@@ -58,7 +58,7 @@ const AddProduct = () => {
                     title: data.title,
                     usedTime: data.usedTime
                 }
-                console.log(addedProduct);
+                // console.log(addedProduct);
                 //save A New Add Product to database
                 fetch('http://localhost:5000/addedProduct', {
                     method: 'POST',
@@ -70,10 +70,10 @@ const AddProduct = () => {
                 })
                     .then(res => res.json())
                     .then(result => {
-                        console.log(result);
+                        // console.log(result);
                         if (result.acknowledged) {
                             toast.success(`${user?.displayName} added Product successfully`);
-                            navigate('/dashboard')
+                            navigate('/dashboard/myProducts')
                         }
                     })
             });

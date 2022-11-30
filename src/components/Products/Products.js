@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../BookingModal/BookingModal';
 import ProductCart from '../ProductCart/ProductCart';
-import Product from './Product';
 
 const Products = () => {
     const products = useLoaderData();
@@ -10,7 +9,7 @@ const Products = () => {
 
     return (
         <div className='mx-auto'>
-            <h1 className="text-3xl font-bold underline">this is products</h1>
+            <h1 className="text-3xl font-bold underline text-center">Our Products</h1>
             <div className='grid lg:grid-cols-2 gap-6 p-6 '>
                 {
                     products.map(product => <ProductCart

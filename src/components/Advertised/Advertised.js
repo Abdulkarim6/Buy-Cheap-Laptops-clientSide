@@ -15,7 +15,7 @@ const Advertised = () => {
     return (
         <div>
             <h2 className="text-4xl text-center bg-base-300 text-base-content py-2 font-semibold">Suggest You for This Products</h2>
-            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-6'>
+            <div className='grid gap-6 lg:grid-cols-2 p-6'>
                 {
                     advertiseProducts?.map(advertiseProduct => <AdvertisedCard
                         key={advertiseProduct._id}

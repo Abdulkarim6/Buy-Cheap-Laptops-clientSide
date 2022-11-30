@@ -3,15 +3,13 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
-import { GoogleAuthProvider } from 'firebase/auth';
 import useToken from '../../hooks/useToken';
 
-const provider = new GoogleAuthProvider();
 
 const SignIn = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const { signIn, signInGoogle } = useContext(AuthContext);
+    const { signIn,  } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
     const [loginUserEmail, setLoginUserEmail] = useState('')
@@ -32,24 +30,17 @@ const SignIn = () => {
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 toast.success(`${user.displayName} Login Successfully`);
                 setLoginUserEmail(data.email)
             })
             .catch(error => {
                 setLoginError(error.message)
-                console.log(error)
+                // console.log(error)
             });
     }
 
-    const handleGoogleSingIn = () => {
-        signInGoogle(provider)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-            })
-            .catch(err => console.log(err))
-    };
+   
 
     return (
         <div className='h-[500px] flex justify-center items-center'>
@@ -80,8 +71,7 @@ const SignIn = () => {
                     <input type="submit" className='btn btn-accent w-full' value='Login' />
                 </form>
                 <p>If you are new this site!<Link to='/signup' className='text-secondary'>create new account</Link> </p>
-                <div className="divider">OR</div>
-                <button onClick={handleGoogleSingIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                
             </div>
         </div>
     );

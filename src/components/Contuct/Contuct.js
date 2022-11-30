@@ -1,36 +1,58 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../Contexts/AuthProvider';
+
 
 const Contuct = () => {
+    const { user } = useContext(AuthContext)
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const handleFindUsersMessage = data => {
+        const message = {
+            name: data.name,
+            email: user?.email,
+            message: data.message
+        }
+        // console.log(message);
+        //save message to database
+        fetch('http://localhost:5000/message', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(message)
+        })
+            .then(res => res.json())
+            .then(result => {
+                // console.log(result);
+                if (result.acknowledged) {
+                    toast.success(`Thankyou for share your experience`);
+                }
+            })
+    }
+
     return (
-        <div className="hero  bg-base-200 text-base-content rounded my-3">
-            <div className="hero-content w-full">
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200 text-center">
-                    <div className="card-body">
-                        <p className="py-6 text-semibold text-xl">Contact Us</p>
-                        <h4 className="text-xl font-bold text-primary">Stay connected with us</h4>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="text" placeholder="email" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Subject</span>
-                            </label>
-                            <input type="text" name="" className="input input-bordered" placeholder='Subject' />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Message</span>
-                            </label>
-                            <textarea className="textarea input input-bordered" placeholder="Your Message"></textarea>
-                        </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-info">Submit</button>
-                        </div>
+        <div className='my-3 flex justify-center items-center'>
+            <div className='w-96 borderd'>
+                <h4 className="text-xl font-bold text-primary">Please ! Share your experience about this site</h4>
+                <form onSubmit={handleSubmit(handleFindUsersMessage)}>
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Your Name</span></label>
+                        <input type="text"
+                            {...register("name", { required: 'Name is required' })}
+                            placeholder="Your Name" className="input input-bordered w-full" />
+                        {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                     </div>
-                </div>
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Your Message</span></label>
+                        <textarea
+                            {...register("message", { required: 'Message is required' })}
+                            className="textarea textarea-primary" placeholder="Your Message"></textarea>
+                        {errors.message && <p className='text-red-600'>{errors.message?.message}</p>}
+                    </div>
+                    <input type="submit" className='btn btn-accent w-full mt-3' value='Send' />
+                </form>
             </div>
         </div>
 

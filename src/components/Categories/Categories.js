@@ -16,8 +16,8 @@ const Categories = () => {
 
     return (
         <div className=' bg-base-200 text-base-content'>
-            <h1 className="text-3xl font-bold underline">
-                this is Categories
+            <h1 className="text-3xl font-bold underline text-center">
+                Our Products Brands
             </h1>
             <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-6'>
                 {

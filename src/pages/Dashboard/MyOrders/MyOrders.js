@@ -16,7 +16,6 @@ const MyOrders = () => {
             return data;
         }
     })
-    console.log(myOrderProducts);
     return (
         <div>
             <h2 className="text-4xl text-center bg-base-300 text-base-content py-2 font-semibold">You Book this products</h2>
@@ -54,7 +53,7 @@ const MyOrders = () => {
                                     </td>
                                     <td><span>{myOrderProduct.bookingDate}</span></td>
                                     <th>
-                                        <label htmlFor="confirmation-madal" className="btn btn-sm btn-error">Delete</label>
+                                        <label className="btn btn-sm btn-error">Pay</label>
                                     </th>
                                 </tr>
                             )

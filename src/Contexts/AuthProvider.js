@@ -14,10 +14,7 @@ const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password)
     };
 
-    const updateUser = (userInfo) => {
-        return updateProfile(auth.currentUser, userInfo)
-    };
-
+    
     const signIn = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
@@ -28,12 +25,7 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     };
 
-    const signInGoogle = (provider) => {
-        setLoading(true)
-        return signInWithPopup(auth, provider)
-    };
-
-
+  
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             // console.log('user observing');
@@ -43,7 +35,7 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe()
     }, [])
 
-    const authInfo = { createUser, user, updateUser, signIn , logOut, loading, signInGoogle}
+    const authInfo = { createUser, user, signIn , logOut, loading}
 
     return (
         <AuthContext.Provider value={authInfo}>

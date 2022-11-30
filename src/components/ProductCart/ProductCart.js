@@ -1,24 +1,25 @@
-import React from 'react';
+import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 
-const ProductCart = ({product, setBookingProduct}) => {
-    console.log(product);
+const ProductCart = ({ product, setBookingProduct }) => {
 
-    const { id, image, location, title, originalPrice, postDate,
-        recelPrice, role, sellerName, usedTime, _id, Phone, Condition, Description } = product;
+    const { image, location, title, originalPrice, postDate,
+        sellerName, usedTime, Phone, Condition, Description } = product;
 
     return (
-         <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl">
             <figure><img src={image} className='h-56' alt="" /></figure>
             <div className="card-body">
                 <h2 className="card-title text-3xl">
                     {title}
-                    <div className="badge badge-secondary">NEW</div>
                 </h2>
                 <div>
                     <div className='flex justify-between'>
                         <div className='text-semibold'>
+                            <h2 className="card-title text-xl">
+                                <p>Seller name : {sellerName} </p>
+                                <CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon>
+                            </h2>
                             <strong><p>Sell Price : {product?.recelPrice}</p></strong>
-                            <strong><p>Seller name : {sellerName}</p></strong>
                             <p>Location : {location}</p>
                             <p>Phone : {Phone}</p>
                         </div>

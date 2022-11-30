@@ -15,7 +15,7 @@ const AllBuyers = () => {
             return data;
         }
     })
-    console.log(allBuyers);
+    // console.log(allBuyers);
 
     const handleDeleteBuyer = Buyer => {
         fetch(`http://localhost:5000/buyer/${Buyer._id}`, {
@@ -26,7 +26,7 @@ const AllBuyers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.acknowledged) {
                     toast.success(`${Buyer.name} deleted successfully`)
                     refetch()
@@ -43,7 +43,6 @@ const AllBuyers = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Photo</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Delete</th>
@@ -55,16 +54,7 @@ const AllBuyers = () => {
                             allBuyers?.length && allBuyers.map((Buyer, i) =>
                                 <tr key={Buyer._id}>
                                     <th>{i + 1}</th>
-                                    <td>
-                                        <div className="flex items-center space-x-3">
-                                            <div className="avatar">
-                                                <div className="w-20 rounded">
-                                                    <img src={Buyer.imgUrl} alt="BuyerImg" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </td>
+                                    
                                     <td>
                                         <div>
                                             <div className="font-bold">{Buyer.name}</div>
