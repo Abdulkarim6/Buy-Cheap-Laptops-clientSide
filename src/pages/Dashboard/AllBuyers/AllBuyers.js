@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
     const role = 'Buyer';
-    const url = (`http://localhost:5000/allBuyers?role=${role}`)
+    const url = (`https://cheap-laptop-server-side.vercel.app/allBuyers?role=${role}`)
 
     const { data: allBuyers = [], refetch } = useQuery({
         queryKey: ['allBuyers', role],
@@ -18,7 +18,7 @@ const AllBuyers = () => {
     // console.log(allBuyers);
 
     const handleDeleteBuyer = Buyer => {
-        fetch(`http://localhost:5000/buyer/${Buyer._id}`, {
+        fetch(`https://cheap-laptop-server-side.vercel.app/buyer/${Buyer._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`

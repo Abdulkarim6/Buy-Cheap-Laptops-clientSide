@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             { path: '/blog', element: <Blog></Blog> },
             {
                 path: '/products/:id', element: <PrivateRoute><Products></Products></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/products/${params.id}`)
             },
             {
                 path: '/signup', element: <SignUP></SignUP>

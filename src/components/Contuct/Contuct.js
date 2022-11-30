@@ -16,7 +16,7 @@ const Contuct = () => {
         }
         // console.log(message);
         //save message to database
-        fetch('http://localhost:5000/message', {
+        fetch('https://cheap-laptop-server-side.vercel.app/message', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
