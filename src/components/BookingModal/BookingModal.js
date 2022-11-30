@@ -63,7 +63,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-                        <input name='name' type="text" defaultValue={user?.displayName} placeholder="Your Name" className="input w-full borderd" disabled />
+                        <input name='name' type="text" placeholder="Your Name" className="input w-full borderd" />
                         <input name='email' type="text" defaultValue={user?.email} placeholder="Email Address" className="input w-full borderd" disabled />
                         <input name='date' type="text" disabled value={date} className="input w-full  borderd " />
                         <input name='productName' type="text" disabled value={title} className="input w-full  borderd " />
