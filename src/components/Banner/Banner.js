@@ -6,7 +6,7 @@ import samsung from '../../images/samsung-3.jpg';
 import useEmblaCarousel from 'embla-carousel-react'
 import './Banner.css'
 import Autoplay from 'embla-carousel-autoplay'
-import { DotButton, useDotButton } from './useDotButton';
+import { DotButton, useDotButton } from './DotButton/DotButton.jsx';
 
 
 const Banner = () => {
@@ -35,6 +35,7 @@ const Banner = () => {
                 <h3 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold font-serif ml-5">Wellcome to Our</h3>
                 <h3 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold font-serif  ml-28 italic"> Buy Chep Laptops</h3>
             </div>
+            
             <div className='w-full lg:w-3/5 ... bg-gradient-to-r from-violet-500 to-fuchsia-400'>
                 <div className="embla__viewport" ref={emblaRef}>
                     <div className="embla__container">
@@ -52,6 +53,7 @@ const Banner = () => {
                         </div>
                     </div>
                     
+                </div>
                     <div className="embla__dots">
                         {scrollSnaps.map((_, index) => (
                             <DotButton
@@ -63,7 +65,6 @@ const Banner = () => {
                             />
                         ))}
                     </div>
-                </div>
             </div>
         </div>
     );
