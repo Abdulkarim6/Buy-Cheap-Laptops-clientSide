@@ -13,7 +13,7 @@ const Navbar = () => {
 
     const menuItems = <React.Fragment>
         <li><Link >{user?.email}</Link></li>
-        <li><Link to='/'>Homesss</Link></li>
+        <li><Link to='/'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         {
             user?.uid ?
@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar bg-neutral text-neutral-content flex justify-between">
+            <div className="navbar  bg-base-200 flex justify-between">
                 <div className="navbar-start">
                     <div className="dropdown bg-neutral text-neutral-content">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -42,7 +42,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal p-0 ">
+                    <ul className="menu menu-horizontal text-lg font-medium p-0 ">
                         {menuItems}
                     </ul>
                 </div>

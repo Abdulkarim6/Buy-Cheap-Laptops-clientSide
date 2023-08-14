@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
-import bgimg from '../../images/banner.jpg';
-import asus from '../../images/asus-1.jpg';
-import lenovo from '../../images/lenovo-1.jpg';
-import samsung from '../../images/samsung-3.jpg';
+import bgimg from '../../images/-banner.jpg';
+import asus from '../../images/-asus.jpg';
+import lenovo from '../../images/-lenovo.jpg';
+import samsung from '../../images/-samsung.png'
 import useEmblaCarousel from 'embla-carousel-react'
 import './Banner.css'
 import Autoplay from 'embla-carousel-autoplay'
@@ -52,9 +52,7 @@ const Banner = () => {
                             <img className="embla__slide__img" src={samsung} alt="" />
                         </div>
                     </div>
-                    
-                </div>
-                    <div className="embla__dots">
+                    <div className="embla__dots -mt-6 relative bg-cyan-300 rounded-md">
                         {scrollSnaps.map((_, index) => (
                             <DotButton
                                 key={index}
@@ -65,6 +63,7 @@ const Banner = () => {
                             />
                         ))}
                     </div>
+                </div>
             </div>
         </div>
     );
