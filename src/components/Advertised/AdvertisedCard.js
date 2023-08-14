@@ -7,40 +7,39 @@ const AdvertisedCard = ({ advertiseProduct }) => {
         recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = advertiseProduct;
 
     return (
-        
-            <div className="card bg-base-100 shadow-xl">
-                <figure><img src={image} className='h-56' alt="" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title text-3xl">
-                        {title}
-                    </h2>
-                    <div>
-                        <div className='flex justify-between'>
-                            <div className='text-semibold'>
-                            <h2 className="card-title text-xl">
-                                <p>Seller name : {sellerName} </p>
-                                <CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon>
-                            </h2>
-                                <strong><p>Sell Price : {recelPrice}</p></strong>
-                                <p>Location : {location}</p>
-                                <p>Phone : {Phone}</p>
-                            </div>
-                            <div className='text-semibold'>
-                                <p>Original price : {originalPrice}</p>
-                                <p>Post : {postDate}</p>
-                                <p>used Time : {usedTime}</p>
-                                <p>Condition : {Condition}</p>
-                            </div>
-                        </div>
-                        <p>Description : {Description}</p>
+
+        <div className="card bg-base-100 shadow-xl">
+            <figure><img src={image} className='h-56' alt="" /></figure>
+            <div className="card-body">
+                <h2 className="card-title text-lg lg:text-3xl">
+                    {title}
+                </h2>
+                <div className='text-lg font-semibold'>
+                    <div className="flex justify-start text-base lg:text-xl">
+                        <div><p>Seller name : {sellerName}</p></div>
+                        <div><CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon></div>
                     </div>
-                    <div className="card-actions justify-end">
-                        {/* <label onClick={() => setBookingProduct(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label> */}
-                    </div>
+                    <strong><p>Sell Price : {recelPrice}</p></strong>
+                    <p>Original price : {originalPrice}</p>
+                    <p>used Time : {usedTime}</p>
                 </div>
+                <label htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
             </div>
-       
+        </div>
+
     );
 };
 
 export default AdvertisedCard;
+
+
+{/* <label onClick={() => setBookingProduct(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label> */ }
+
+
+{/* <div className='text-semibold'>
+    <p>Location : {location}</p>
+    <p>Phone : {Phone}</p>
+    <p>Post : {postDate}</p>
+    <p>Condition : {Condition}</p>
+    <p>Description : {Description}</p>
+</div> */}

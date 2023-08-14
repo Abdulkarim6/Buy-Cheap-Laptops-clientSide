@@ -16,10 +16,10 @@ const Categories = () => {
 
     return (
         <div className=' bg-base-200 text-base-content'>
-            <h1 className="text-3xl font-bold underline text-center">
+            <h1 className="bg-cyan-300 rounded-md text-3xl text-center font-serif py-2 font-semibold">
                 Our Products Brands
             </h1>
-            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-6'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
                     categories?.map(category => <Category
                         key={category._id}

@@ -23,7 +23,7 @@ const UserMassage = () => {
             <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 p-6'>
                 {
                     messages.map(message =>
-                        <div key={message._id} className="card w-96 bg-base-100 shadow-xl">
+                        <div key={message._id} className="card bg-base-100 shadow-xl">
                             <div className="card-body">
                                 <p>{message.message}</p>
                                 <div className="card-actions justify-end">
