@@ -7,7 +7,7 @@ const UserMassage = () => {
     const { data: messages = [], refetch } = useQuery({
         queryKey: ['messages'],
         queryFn: async () => {
-            const res = await fetch('https://cheap-laptop-server-side.vercel.app/messages');
+            const res = await fetch('http://localhost:5000/messages');
             const data = await res.json();
             refetch()
             return data;

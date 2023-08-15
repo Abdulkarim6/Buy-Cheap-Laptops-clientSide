@@ -6,7 +6,7 @@ const Categories = () => {
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('https://cheap-laptop-server-side.vercel.app/categories');
+            const res = await fetch('http://localhost:5000/categories');
             const data = await res.json();
             // console.log(data);
             return data;
@@ -15,7 +15,7 @@ const Categories = () => {
     })
 
     return (
-        <div className=' bg-base-200 text-base-content'>
+        <div className='bg-base-200 text-base-content'>
             <h1 className="bg-cyan-300 rounded-md text-3xl text-center font-serif py-2 font-semibold">
                 Our Products Brands
             </h1>

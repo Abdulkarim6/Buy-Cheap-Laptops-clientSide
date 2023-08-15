@@ -1,10 +1,11 @@
 import React from 'react';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 
 const AdvertisedCard = ({ advertiseProduct }) => {
 
-    const { image, location, title, originalPrice, postDate,
-        recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = advertiseProduct;
+    const { image, title, originalPrice,
+        recelPrice, sellerName, usedTime, _id } = advertiseProduct;
 
     return (
 
@@ -23,7 +24,7 @@ const AdvertisedCard = ({ advertiseProduct }) => {
                     <p>Original price : {originalPrice}</p>
                     <p>used Time : {usedTime}</p>
                 </div>
-                <label htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
+                <Link to={`/advertiseProductDetails/${_id}`}><button className="btn btn-primary">Product Details</button></Link>
             </div>
         </div>
 
@@ -31,15 +32,3 @@ const AdvertisedCard = ({ advertiseProduct }) => {
 };
 
 export default AdvertisedCard;
-
-
-{/* <label onClick={() => setBookingProduct(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label> */ }
-
-
-{/* <div className='text-semibold'>
-    <p>Location : {location}</p>
-    <p>Phone : {Phone}</p>
-    <p>Post : {postDate}</p>
-    <p>Condition : {Condition}</p>
-    <p>Description : {Description}</p>
-</div> */}

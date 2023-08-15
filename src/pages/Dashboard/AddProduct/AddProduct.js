@@ -18,7 +18,7 @@ const AddProduct = () => {
     const { data: productCategorys = [], isLoading } = useQuery({
         queryKey: ['productCategorys'],
         queryFn: async () => {
-            const res = await fetch('https://cheap-laptop-server-side.vercel.app/productCategorys');
+            const res = await fetch('http://localhost:5000/productCategorys');
             const data = await res.json();
             return data;
         }
@@ -60,7 +60,7 @@ const AddProduct = () => {
                 }
                 // console.log(addedProduct);
                 //save A New Add Product to database
-                fetch('https://cheap-laptop-server-side.vercel.app/addedProduct', {
+                fetch('http://localhost:5000/addedProduct', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
