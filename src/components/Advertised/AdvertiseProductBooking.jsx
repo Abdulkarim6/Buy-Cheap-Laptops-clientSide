@@ -6,7 +6,6 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const AdvertiseProductBooking = () => {
     const advertiseProductDetails = useLoaderData();
-    console.log(advertiseProductDetails);
     const { email, image, location, title, originalPrice, postDate,
         recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = advertiseProductDetails;
 
@@ -38,9 +37,8 @@ const AdvertiseProductBooking = () => {
             location
         }
 
-        // console.log(buyerBookingProduct);
 
-        fetch('http://localhost:5000/buyerBookingProducts', {
+        fetch('https://cheap-laptop-server-side.vercel.app/buyerBookingProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -55,7 +53,6 @@ const AdvertiseProductBooking = () => {
                 else {
                     toast.error(data.message)
                 }
-                console.log(data);
             })
 
     }

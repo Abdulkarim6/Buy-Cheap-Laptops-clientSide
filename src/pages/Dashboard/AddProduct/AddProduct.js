@@ -18,7 +18,7 @@ const AddProduct = () => {
     const { data: productCategorys = [], isLoading } = useQuery({
         queryKey: ['productCategorys'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/productCategorys');
+            const res = await fetch('https://cheap-laptop-server-side.vercel.app/productCategorys');
             const data = await res.json();
             return data;
         }
@@ -60,7 +60,7 @@ const AddProduct = () => {
                 }
                 // console.log(addedProduct);
                 //save A New Add Product to database
-                fetch('http://localhost:5000/addedProduct', {
+                fetch('https://cheap-laptop-server-side.vercel.app/addedProduct', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
@@ -111,8 +111,8 @@ const AddProduct = () => {
                                 </div>
                                 <div className="form-control w-full">
                                     <label className="label"><span className="label-text">Specialty</span></label>
-                                    <select {...register("productCategory", { required: 'select your product category' })} className="select select-ghost input-bordered  w-full">
-                                        <option disabled selected>Select your product category</option>
+                                    <select defaultValue={'default'} {...register("productCategory", { required: 'select your product category' })} className="select select-ghost input-bordered  w-full">
+                                        <option value="default" disabled>Select your product category</option>
                                         {
                                             productCategorys.map(productCategory => <option
                                                 key={productCategory._id}

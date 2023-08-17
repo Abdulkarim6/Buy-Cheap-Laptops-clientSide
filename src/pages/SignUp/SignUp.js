@@ -4,20 +4,23 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
+import { useEffect } from 'react';
 
 
 const SignUP = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signupError, setSignupError] = useState('');
     const navigate = useNavigate();
 
-    const [ newUserEmail, setNewUserEmail ] = useState('');
+    const [newUserEmail, setNewUserEmail] = useState('');
     const [token] = useToken(newUserEmail);
 
-    if (token) {
-        navigate('/')
-    }
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    }, [navigate, token])
 
 
     const handleSignup = data => {
@@ -25,10 +28,12 @@ const SignUP = () => {
         setSignupError('')
         createUser(email, password)
             .then(result => {
-                const user = result.user;
-                // console.log(user);
-                toast.success('user create successfully')
-                saveUserData(name, email, role)
+                updateUser({ displayName: name })
+                    .then(() => {
+                        toast.success(`${result?.user?.displayName} created account successfully`)
+                        saveUserData(name, email, role)
+                    })
+                    .catch(err => console.log(err));
             })
             .catch(err => {
                 setSignupError(err.message)
@@ -40,7 +45,7 @@ const SignUP = () => {
         const user = { name, email, role };
         // console.log(user);
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://cheap-laptop-server-side.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -72,8 +77,8 @@ const SignUP = () => {
                     </div>
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Email</span></label>
-                        <select {...register("role", { required: 'usertag is required' })} className="select select-ghost input-bordered w-full">
-                            <option disabled selected className='text-xl'>select a option You buyer or seller</option>
+                        <select defaultValue={'default'} {...register("role", { required: 'usertag is required' })} className="select select-ghost input-bordered w-full">
+                            <option value="default" disabled className='text-xl'>select a option You buyer or seller</option>
                             <option className='text-xl my-3' >Seller</option>
                             <option className='text-xl'>Buyer</option>
                         </select>
@@ -92,7 +97,7 @@ const SignUP = () => {
                     signupError && <p className='text-red-500'>{signupError}</p>
                 }
                 <p>Allready have an account <Link to='/signin' className='text-secondary'>Please Login</Link> </p>
-                
+
             </div>
         </div>
     );

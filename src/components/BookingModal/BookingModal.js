@@ -7,7 +7,6 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const { user } = useContext(AuthContext);
-    // console.log(user, bookingProduct);
 
     const handleBooking = event => {
         event.preventDefault();
@@ -33,9 +32,8 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
             location
         }
 
-        // console.log(buyerBookingProduct);
 
-        fetch('http://localhost:5000/buyerBookingProducts', {
+        fetch('https://cheap-laptop-server-side.vercel.app/buyerBookingProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -51,7 +49,6 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
                 else {
                     toast.error(data.message)
                 }
-                console.log(data);
             })
 
     }

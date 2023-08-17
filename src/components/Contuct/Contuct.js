@@ -16,7 +16,7 @@ const Contuct = () => {
         }
         // console.log(message);
         //save message to database
-        fetch('http://localhost:5000/message', {
+        fetch('https://cheap-laptop-server-side.vercel.app/message', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -33,19 +33,19 @@ const Contuct = () => {
     }
 
     return (
-        <div className='my-3 flex justify-center items-center'>
-            <div className='w-96 borderd'>
-                <h4 className="text-xl font-bold text-primary">Please ! Share your experience about this site</h4>
+        <div className='my-3 flex justify-center items-center bg-fixed'  style={{backgroundImage : `url(https://i.ibb.co/WK62JgX/banner2.jpg)`, backgroundSize : "cover", backgroundPosition : 'center'}}>
+            <div className='borderd'>
+                <h4 className="text-xl lg:text-2xl font-bold text-green-500">Please ! Share your experience about this site</h4>
                 <form onSubmit={handleSubmit(handleFindUsersMessage)}>
                     <div className="form-control w-full">
-                        <label className="label"><span className="label-text">Your Name</span></label>
+                        <label className="label"><span className="label-text text-white text-base">Your Name</span></label>
                         <input type="text"
                             {...register("name", { required: 'Name is required' })}
                             placeholder="Your Name" className="input input-bordered w-full" />
                         {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                     </div>
                     <div className="form-control w-full">
-                        <label className="label"><span className="label-text">Your Message</span></label>
+                        <label className="label"><span className="label-text text-white text-base">Your Message</span></label>
                         <textarea
                             {...register("message", { required: 'Message is required' })}
                             className="textarea textarea-primary" placeholder="Your Message"></textarea>

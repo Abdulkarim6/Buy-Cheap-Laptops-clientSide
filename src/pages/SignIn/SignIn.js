@@ -4,12 +4,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
+import { useEffect } from 'react';
 
 
 const SignIn = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const { signIn,  } = useContext(AuthContext);
+    const { signIn, } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
     const [loginUserEmail, setLoginUserEmail] = useState('')
@@ -19,9 +20,11 @@ const SignIn = () => {
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
-    if (token) {
-        navigate(from, { replace: true });
-    }
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [navigate, token, from])
 
 
     const handleLogin = data => {
@@ -40,7 +43,7 @@ const SignIn = () => {
             });
     }
 
-   
+
 
     return (
         <div className='h-[500px] flex justify-center items-center'>
@@ -71,7 +74,7 @@ const SignIn = () => {
                     <input type="submit" className='btn btn-accent w-full' value='Login' />
                 </form>
                 <p>If you are new this site!<Link to='/signup' className='text-secondary'>create new account</Link> </p>
-                
+
             </div>
         </div>
     );
