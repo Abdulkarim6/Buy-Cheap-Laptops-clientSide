@@ -29,7 +29,7 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/products/${params.id}`)
             },
             {
-                path: `/advertiseProductDetails/:id`, element: <AdvertiseProductBooking></AdvertiseProductBooking>,
+                path: `/advertiseProductDetails/:id`, element: <PrivateRoute><AdvertiseProductBooking></AdvertiseProductBooking></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/advertiseProductDetails/${params.id}`)
             },
             {
