@@ -5,10 +5,12 @@ import Navbar from '../shared/Navbar/Navbar';
 
 const Main = () => {
     return (
-        <div>
+        <div className='min-h-screen'>
             <Navbar></Navbar>
             <Outlet></Outlet>
-            <Footer></Footer>
+            <div className=''>
+              <Footer></Footer>
+            </div>
         </div>
     );
 };

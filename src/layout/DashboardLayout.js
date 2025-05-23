@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { HiMiniXMark, HiMiniBars3 } from "react-icons/hi2";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from '../Contexts/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
@@ -10,44 +11,63 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
     const [isSeller] = useSeller(user?.email)
+    const [deshboardToggleIcon, setdeshboardToggleIcon] = useState(false);
+    const linkClass ='btn btn-ghost w-[80%] justify-start'
+    
+    const dashboardMenuShow =() => {
+        setdeshboardToggleIcon(current => !current);
+    }
+    //The sideNav is default only for large devices; for small and medium devices, it will be controlled by the dashboardMenuShow function.
+    const sideNav = deshboardToggleIcon ? " left-0 transition-all ease duration-500" : "lg:left-0 -left-[100%]";
 
     return (
-        <div>
+        <section className='min-h-screen'>
             <Navbar></Navbar>
-            {/* <label htmlFor="Dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </label> */}
-
-            <div className="drawer drawer-mobile">
-                <input id="Dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-
-                    <Outlet></Outlet>
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="Dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base bg-base-200 font-medium">
+            {/* <div className=""> */}
+               
+                <div className="relative top-0 w-full flex justify-between ">
+                    <div>
+                    <ul className={`${sideNav} lg:fixed lg:block lg:w-[25%] absolute md:w-[45%] w-[60%] h-dvh p-4 bg-purple-300 border-2 border-e-2 border-r-white font-medium`}>
                        
-                                <li><Link to='/dashboard'>My Orders</Link></li>
+                                <li><Link className={linkClass} to='/dashboard'>My Orders</Link></li>
                             {
                             isSeller && <>
-                                <li><Link to="/dashboard/myProducts">My Products</Link></li>
-                                <li><Link to="/dashboard/addProduct">Add A Product</Link></li>
+                                <li><Link className={linkClass} to="/dashboard/myProducts">My Products</Link></li>
+                                <li><Link className={linkClass} to="/dashboard/addProduct">Add A Product</Link></li>
                             </>
                         }
                         {
                             isAdmin && <>
-                                <li><Link to="/dashboard/allSellers">All Selers</Link></li>
-                                <li><Link to='/dashboard/allBuyers'>All Buyers</Link></li>
+                                <li><Link className={linkClass} to="/dashboard/allSellers">All Selers</Link></li>
+                                <li><Link className={linkClass} to='/dashboard/allBuyers'>All Buyers</Link></li>
                             </>
                         }
-
-
                     </ul>
+                    </div>
+                    
+                    <div className='w-full lg:w-[75%] '>
+
+                        <div className='fixed lg:hidden top-16 right-0 bg-violet-500' onClick={() => dashboardMenuShow()}>
+                            {
+                               <label htmlFor="" className="btn  btn-ghost">
+                                        {
+                                        deshboardToggleIcon ?
+                                            <HiMiniXMark className="h-6 w-6 md:h-7 md:w-7" />
+                                        :
+                                            <HiMiniBars3 className="h-6 w-6 md:h-7 md:w-7" />
+                                        }
+                               </label>
+                            }
+                        </div>
+
+                        <Outlet></Outlet>
+                    </div>
                 </div>
-            </div>
+
+
+            {/* </div> */}
             <Footer></Footer>
-        </div>
+        </section>
     );
 };
 

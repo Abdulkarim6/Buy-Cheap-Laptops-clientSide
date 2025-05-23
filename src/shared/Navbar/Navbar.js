@@ -1,18 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HiMiniXMark, HiMiniBars3 } from "react-icons/hi2";
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    // console.log(user);
     const handleLogOut = () => {
         logOut()
             .then(() => { })
             .catch()
     }
 
+   const [toggleIcon, setToggleIcon] = useState(false);
+   const [isActive, setActive] = useState(false);
+    const homeMenuShow =() => {
+        setToggleIcon(current => !current);
+        setActive(current => !current);
+    }
+    const buttonClass = isActive ? 'visible' : 'hidden';
+
     const menuItems = <React.Fragment>
-        <li><Link >{user?.email}</Link></li>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         {
@@ -27,31 +34,34 @@ const Navbar = () => {
     </React.Fragment>
 
     return (
-        <div>
-            <div className="navbar  bg-base-200 flex justify-between">
-                <div className="navbar-start">
-                    <div className="dropdown bg-neutral text-neutral-content">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            <div className="navbar sticky top-0 z-30 bg-black text-white flex justify-between">
+                <div className="navbar-start w-full">
+                    <div className="relative">
+                        <label onClick={() => homeMenuShow()} className="btn btn-ghost md:hidden">
+                            {
+                            toggleIcon ?
+                                <HiMiniXMark className="h-6 w-6 md:h-7 md:w-7" />
+                            :
+                                <HiMiniBars3 className="h-6 w-6 md:h-7 md:w-7" />
+                            }
                         </label>
-                        <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-neutral text-neutral-content rounded-box w-52">
+                        <ul className={`${buttonClass} absolute top-14 text-lg px-3 py-5 shadow bg-black rounded `}>
                             {menuItems}
                         </ul>
                     </div>
-                    <Link className="btn btn-ghost normal-case text-xl">Buy Cheap Laptops</Link>
+                    <div className='flex'>
+                        <strong className="text-xl md:text-2xl lg:text-3xl font-semibold px-0 lg:px-2">Old Laptops Shop</strong>
+                        <p className='hidden lg:flex' title=''>{user?.displayName}</p>
+                    </div>
                 </div>
 
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal text-lg font-medium p-0 ">
+                <div className="navbar-center hidden md:flex">
+                    <ul className="menu menu-horizontal text-xl p-0 ">
                         {menuItems}
                     </ul>
                 </div>
-
-                <label htmlFor="Dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                </label>
+                
             </div>
-        </div>
     );
 };
 
