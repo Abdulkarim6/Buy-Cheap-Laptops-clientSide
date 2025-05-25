@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading || isAdminLoading) {
-        return <div className='flex justify-center mt-20'><button className="btn btn-info loading ">loading</button></div> 
+        return <div className='flex justify-center mt-10'><button className="btn btn-info loading ">loading</button></div> 
     }
 
     if (user && isAdmin) {

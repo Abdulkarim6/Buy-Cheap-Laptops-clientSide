@@ -7,17 +7,12 @@ const MyOrders = () => {
     const { user } = useContext(AuthContext);
     /* loaded all My products start here */
     const url = (`https://cheap-laptop-server-side.vercel.app/myOrderProducts?email=${user?.email}`)
-    // const [loading, setLoading] = useState(true);
-
+  
     const { data: myOrderProducts = [] , isLoading} = useQuery({
         queryKey: ['myOrderProducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            // if(data){
-            //   setLoading(false)
-            // }
-           // console.log(data);
             return data;
         }
     });
@@ -26,20 +21,19 @@ const MyOrders = () => {
 
     return (
         <section>
-            {/* <h2 className="text-lg lg:text-3xl text-center bg-cyan-300 font-serif py-2 font-semibold">You have Booked this products</h2> */}
             {
                 isLoading ?
-                <span className="loading loading-spinner text-error">fgd</span>
-                    :
-                  
+                <button className="btn btn-info loading flex justify-self-center mt-2 lg:mt-4">loading</button>
+                :
+                
                     !myOrderProducts.length ? 
                     
-                       <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>You have no booked any Products</p>
-    
-                        :
-                        // <div className="overflow-x-auto w-full">
-                            //<table className="table w-full font-medium">
-                            <table className="w-full font-medium">
+                    <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>You have no booked any Products</p>
+                    
+                    :
+                    <div>
+                    <h2 className="text-lg lg:text-3xl text-center py-2 font-semibold">Your Booked product list</h2>
+                         <table className="w-full font-medium">
                                 <thead className=''>
                                     <tr className='text-sm md:text-base'>
                                         <th className="invisible">quan</th>
@@ -86,12 +80,9 @@ const MyOrders = () => {
                                         )
                                     }
                                 </tbody>
-                            </table>
-                        // </div>
-                
+                         </table>
+                    </div>
             }
-            
-            
         </section>
     );
 };

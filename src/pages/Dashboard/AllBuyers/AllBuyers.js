@@ -11,22 +11,16 @@ const AllBuyers = () => {
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            // console.log(data);
             return data;
         }
     })
-    // console.log(allBuyers);
 
     const handleDeleteBuyer = Buyer => {
         fetch(`https://cheap-laptop-server-side.vercel.app/buyer/${Buyer._id}`, {
             method: 'DELETE',
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
-        })
+         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
                 if (data.acknowledged) {
                     toast.success(`${Buyer.name} deleted successfully`)
                     refetch()
@@ -37,9 +31,9 @@ const AllBuyers = () => {
 
     return (
         <div>
-            <h2 className="text-lg lg:text-3xl font-medium bg-cyan-300 font-serif p-2">Total buyers :{allBuyers?.length}</h2>
+            <h2 className="text-lg lg:text-3xl p-2 font-semibold">Total buyers :{allBuyers?.length}</h2>
             {
-                !allBuyers.length ? <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>Can't found any Buyer</p>
+                !allBuyers.length ? <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>Buyer list is empty</p>
 
                     :
 
@@ -68,7 +62,6 @@ const AllBuyers = () => {
                                             <td>
                                                 <label >{Buyer.email}</label>
                                             </td>
-                                            {/* <td><label onClick={() => handleAdvertiseProduct(product)} className="btn btn-sm btn-primary">advertise</label></td> */}
                                             <td>
                                                 <label onClick={() => handleDeleteBuyer(Buyer)} className="btn btn-sm btn-error">Delete</label>
                                             </td>

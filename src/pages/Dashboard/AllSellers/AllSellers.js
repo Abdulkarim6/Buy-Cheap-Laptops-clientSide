@@ -11,20 +11,17 @@ const AllSellers = () => {
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            // console.log(data);
             return data;
         }
     })
-    // console.log(allSellers);
-
+  
     const handleDeleteSeller = Seller => {
         fetch(`https://cheap-laptop-server-side.vercel.app/seller/${Seller._id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
-                if (data.acknowledged) {
+               if (data.acknowledged) {
                     toast.success(`${Seller.name} deleted successfully`)
                     refetch()
                 }
@@ -37,7 +34,6 @@ const AllSellers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
                 if (data.modifiedCount > 0) {
                     toast.success('Make Verify Successfully')
                     refetch()
@@ -48,9 +44,9 @@ const AllSellers = () => {
 
     return (
         <div>
-            <h2 className="text-lg lg:text-3xl font-medium bg-cyan-300 font-serif p-2">Total Sellers : {allSellers?.length}</h2>
+            <h2 className="text-lg lg:text-3xl p-2 font-semibold">Total Sellers : {allSellers?.length}</h2>
             {
-                !allSellers.length ? <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>Can't found any Sellers</p>
+                !allSellers.length ? <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>Seller list is empty</p>
 
                     :
 
