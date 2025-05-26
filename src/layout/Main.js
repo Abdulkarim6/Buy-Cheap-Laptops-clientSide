@@ -5,11 +5,13 @@ import Navbar from '../shared/Navbar/Navbar';
 
 const Main = () => {
     return (
-        <div className='min-h-screen'>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <div className=''>
-              <Footer></Footer>
+        <div className='flex flex-col min-h-screen'>
+            <div className='flex-1'>
+                <Navbar></Navbar>
+                <Outlet></Outlet>
+            </div>
+            <div>
+               <Footer></Footer>
             </div>
         </div>
     );

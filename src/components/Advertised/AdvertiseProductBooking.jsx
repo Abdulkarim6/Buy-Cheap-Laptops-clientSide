@@ -55,39 +55,37 @@ const AdvertiseProductBooking = () => {
                     toast.error(data.message)
                 }
             })
-
     }
 
     return (
-        <section className='flex flex-col lg:flex-row md:flex-row bg-base-200'>
-            <div className="card w-full lg:w-1/2 bg-base-100 shadow-xl mb-2 p-3">
+        <section className='flex flex-col lg:flex-row md:flex-row p-2'>
+            <div className="card w-full md:w-3/5 lg:w-1/2 bg-base-100 shadow-xl mb-2 p-3">
                 <figure><img src={image} className='h-56' alt="" /></figure>
-                <h2 className="card-title text-lg lg:text-3xl">
+                <h2 className="card-title text-xl lg:text-3xl">
                     {title}
                 </h2>
                 <div className="flex justify-between items-center">
-                    <div className='text-lg font-semibold'>
+                    <div className='md:font-semibold'>
                         <div className="flex justify-start text-base lg:text-xl">
-                            <div><p>Seller name : {sellerName}</p></div>
+                            <div><p>Seller : {sellerName}</p></div>
                             <div><CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon></div>
                         </div>
                         <strong><p>Sell Price : {recelPrice}</p></strong>
                         <p>Original price : {originalPrice}</p>
                         <p>used Time : {usedTime}</p>
                     </div>
-                    {/* <label onClick={() => productDetails(advertiseProduct)} className="btn btn-primary">Book Now</label> */}
-                    <div className='text-lg font-semibold'>
+                    <div className='text-base md:text-lg md:font-semibold'>
                         <p>Location : {location}</p>
                         <p>Phone : {Phone}</p>
                         <p>Post : {postDate}</p>
                         <p>Condition : {Condition}</p>
                     </div>
                 </div>
-                <p className='text-base lg:text-xl'>Description : {Description}</p>
+                <p className='text-base lg:text-xl mt-1'><strong>Note : </strong>{Description}</p>
             </div>
 
 
-            <div className="w-full lg:w-1/2 p-5">
+            <div className="w-full md:w-2/5 lg:w-1/2 px-2 pt-0 md:p-2">
                 <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
                     <input name='name' type="text" placeholder="Your Name" className="input w-full borderd" />
                     <input name='email' type="text" defaultValue={user?.email} placeholder="Email Address" className="input w-full borderd" disabled />
@@ -96,8 +94,7 @@ const AdvertiseProductBooking = () => {
                     <input name='sellPrice' type="text" disabled value={recelPrice} className="input w-full  borderd " />
                     <input name='phone' type="text" placeholder="Phone Number" className="input w-full borderd" />
                     <input name='location' type="text" placeholder="Your Location" className="input w-full borderd" />
-                    <br />
-                    <input type="submit" value="Book Now" className='btn btn-accent ' />
+                    <input type="submit" value="Book Now" className="btn btn-primary mt-3" />
                 </form>
             </div>
         </section>

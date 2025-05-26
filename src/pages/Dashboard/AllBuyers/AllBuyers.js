@@ -30,7 +30,7 @@ const AllBuyers = () => {
 
 
     return (
-        <div>
+        <section>
             <h2 className="text-lg lg:text-3xl p-2 font-semibold">Total buyers :{allBuyers?.length}</h2>
             {
                 !allBuyers.length ? <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>Buyer list is empty</p>
@@ -72,7 +72,7 @@ const AllBuyers = () => {
                         </table>
                     </div>
             }
-        </div>
+        </section>
     );
 };
 

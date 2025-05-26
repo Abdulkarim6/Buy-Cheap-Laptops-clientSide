@@ -45,7 +45,7 @@ const Navbar = () => {
                                 <HiMiniBars3 className="h-6 w-6 md:h-7 md:w-7" />
                             }
                         </label>
-                        <ul className={`${buttonClass} absolute top-14 text-lg px-3 py-5 shadow bg-black rounded `}>
+                        <ul className={`${buttonClass} absolute top-14 text-lg px-3 py-5 w-48 shadow bg-black rounded `}>
                             {menuItems}
                         </ul>
                     </div>

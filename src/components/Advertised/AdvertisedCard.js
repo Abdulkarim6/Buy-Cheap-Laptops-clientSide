@@ -16,20 +16,14 @@ const AdvertisedCard = ({ advertiseProduct }) => {
             data-aos-duration="1000">
             <div className="card bg-base-100 shadow-xl" >
                 <figure><img src={image} className='h-56' alt="" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title text-lg lg:text-3xl">
+                <div className="card-body p-3 !pt-0">
+                    <h2 className="card-title text-lg lg:text-3xl font-semibold">
                         {title}
                     </h2>
-                    <div className='text-lg font-semibold'>
-                        <div className="flex justify-start text-base lg:text-xl">
-                            <div><p>Seller name : {sellerName}</p></div>
-                            <div><CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon></div>
-                        </div>
+                    <div className='text-lg'> 
                         <strong><p>Sell Price : {recelPrice}</p></strong>
-                        <p>Original price : {originalPrice}</p>
-                        <p>used Time : {usedTime}</p>
-                    </div>
-                    <Link to={`/advertiseProductDetails/${_id}`}><button className="btn btn-primary">Product Details</button></Link>
+                     </div>
+                    <Link to={`/advertiseProductDetails/${_id}`}><button className="btn btn-outline btn-primary">Product Details</button></Link>
                 </div>
             </div>
         </div>

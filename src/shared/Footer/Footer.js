@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="flex flex-col sticky top-[100vh] justify-center items-center p-10 bg-black text-white rounded-t">
+        // <footer className="flex flex-col sticky top-[100vh] justify-center items-center p-10 bg-black text-white rounded-t">
+        <footer className="flex flex-col justify-center items-center p-10 bg-black text-white rounded-t">
             <div className="flex gap-3 my-2">
                 <Link to='/blog' className="link link-hover" >Blog</Link>
                 <Link to='/' className="link link-hover">Products</Link>

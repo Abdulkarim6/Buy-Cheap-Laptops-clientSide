@@ -14,20 +14,23 @@ const DashboardLayout = () => {
     const [deshboardToggleIcon, setdeshboardToggleIcon] = useState(false);
     const linkClass ='btn btn-ghost w-[80%] justify-start'
     
-    const dashboardMenuShow =() => {
-        setdeshboardToggleIcon(current => !current);
-    }
+     const dashboardMenuShow =() => {
+         setdeshboardToggleIcon(current => !current);
+     }
     //The sideNav is default only for large devices; for small and medium devices, it will be controlled by the dashboardMenuShow function.
-    const sideNav = deshboardToggleIcon ? " left-0 transition-all ease duration-500" : "lg:left-0 -left-[100%]";
+    const sideNav = deshboardToggleIcon ? "left-0 transition-all ease duration-500" : "lg:left-0 -left-[100%]";
 
     return (
-        <section className='min-h-screen'>
-            <Navbar></Navbar>
-            {/* <div className=""> */}
-               
-                <div className="relative top-0 w-full flex justify-between ">
-                    <div>
-                    <ul className={`${sideNav} lg:fixed lg:block lg:w-[25%] absolute md:w-[45%] w-[60%] h-dvh p-4 bg-purple-300 border-2 border-e-2 border-r-white font-medium`}>
+            <div className="flex flex-col min-h-screen bg-purple-400">
+               {/* dashboard navbar */}
+               <Navbar></Navbar>
+
+
+                <div className="w-full flex flex-row flex-1 justify-between">
+
+                    {/* dashboard sidebar */}
+                             {/* <ul className={`${sideNav} lg:block absolute lg:w-[25%] md:w-[45%] w-[60%] p-4 bg-purple-300 border-e-2 border-b-2 border-white font-medium`}> */}
+                    <ul className={`bg-purple-300 ${sideNav} lg:w-[25%] w-[50%] lg:static absolute top-16 md:top-[70px] bottom-0 border-r-2 border-b-2 border-white`}>
                        
                                 <li><Link className={linkClass} to='/dashboard'>My Orders</Link></li>
                             {
@@ -43,13 +46,15 @@ const DashboardLayout = () => {
                             </>
                         }
                     </ul>
-                    </div>
                     
-                    <div className='w-full lg:w-[75%] '>
+                    {/* dashboard content */}
+                    <div className='w-full lg:w-[75%] flex-1'>
 
-                        <div className='fixed lg:hidden top-16 right-0 bg-violet-500' onClick={() => dashboardMenuShow()}>
+                        {/* dashboard icon */}
+                        {/* <div className='fixed lg:hidden top-16 right-0 bg-purple-400' onClick={() => dashboardMenuShow()}> */}
+                        <div className='fixed lg:hidden top-16 right-0 bg-purple-400' onClick={() => dashboardMenuShow()}>
                             {
-                               <label htmlFor="" className="btn  btn-ghost">
+                               <label htmlFor="" className="btn btn-ghost">
                                         {
                                         deshboardToggleIcon ?
                                             <HiMiniXMark className="h-6 w-6 md:h-7 md:w-7" />
@@ -59,15 +64,20 @@ const DashboardLayout = () => {
                                </label>
                             }
                         </div>
-
+                    
                         <Outlet></Outlet>
                     </div>
+
                 </div>
 
 
-            {/* </div> */}
-            <Footer></Footer>
-        </section>
+                {/* dashboard footer */}
+                {/* <div className='sticky top-[100vh]'> */}
+                <div className='z-10'>
+                   <Footer></Footer>
+                </div>
+            </div>
+            
     );
 };
 
