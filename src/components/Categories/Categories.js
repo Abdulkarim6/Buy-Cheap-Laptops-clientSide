@@ -8,16 +8,19 @@ const Categories = () => {
         queryFn: async () => {
             const res = await fetch('https://cheap-laptop-server-side.vercel.app/categories');
             const data = await res.json();
+            console.log(data);
+            
             return data;
 
         }
     })
 
     return (
-        <div className='bg-base-200 text-base-content'>
-            <h1 className="bg-cyan-300 rounded-md text-3xl text-center font-serif py-2 font-semibold">
-                Our Products Brands
-            </h1>
+        <section className=''>
+            <h2 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">Used Laptops</h2>
+            {/* <h1 className="bg-cyan-300 rounded-md text-3xl text-center font-serif py-2 font-semibold">
+                Laptop Categories
+            </h1> */}
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
                     categories?.map(category => <Category
@@ -27,7 +30,7 @@ const Categories = () => {
                 }
             </div>
 
-        </div>
+        </section>
     );
 };
 

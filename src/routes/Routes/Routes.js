@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import AdvertiseProductBooking from "../../components/Advertised/AdvertiseProductBooking";
+import ProductDetails from "../../shared/ProductDetails/ProductDetails";
 import Blog from "../../components/Blog/Blog";
 import DisplayError from "../../components/DisplayError/DisplayError";
 import Products from "../../components/Products/Products";
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/products/${params.id}`)
             },
             {
-                path: `/advertiseProductDetails/:id`, element: <PrivateRoute><AdvertiseProductBooking></AdvertiseProductBooking></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/advertiseProductDetails/${params.id}`)
+                path: `/ProductDetails/:id`, element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/ProductDetails/${params.id}`)
             },
             {
                 path: '/signup', element: <SignUP></SignUP>

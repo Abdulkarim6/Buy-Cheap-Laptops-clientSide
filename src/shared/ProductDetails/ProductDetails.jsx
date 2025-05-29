@@ -4,11 +4,11 @@ import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
-const AdvertiseProductBooking = () => {
-    const advertiseProductDetails = useLoaderData();
-    console.log(advertiseProductDetails,'9');
+const ProductDetails = () => {
+    const ProductDetails = useLoaderData();
+    console.log(ProductDetails,'9');
     const { email, image, location, title, originalPrice, postDate,
-        recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = advertiseProductDetails;
+        recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = ProductDetails;
 
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
@@ -101,4 +101,4 @@ const AdvertiseProductBooking = () => {
     );
 };
 
-export default AdvertiseProductBooking;
+export default ProductDetails;

@@ -23,7 +23,7 @@ const AdvertisedCard = ({ advertiseProduct }) => {
                     <div className='text-lg'> 
                         <strong><p>Sell Price : {recelPrice}</p></strong>
                      </div>
-                    <Link to={`/advertiseProductDetails/${_id}`}><button className="btn btn-outline btn-primary">Product Details</button></Link>
+                    <Link to={`/ProductDetails/${_id}`}><button className="btn btn-outline btn-primary">Product Details</button></Link>
                 </div>
             </div>
         </div>
