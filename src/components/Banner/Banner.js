@@ -37,7 +37,7 @@ const Banner = () => {
                 <h3 className="md:text-center text-2xl md:text-3xl lg:text-4xl font-bold font-serif  ml-28 italic">Old Laptops Shop</h3>
                 <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>You can create an account here as a buyer or seller.</h5>
                 <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>As a buyer, You can buy your preferred laptop at a low price.</h5>
-                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>As a seller, You can sell your old laptop.</h5>
+                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>As a seller, You can sell your Used laptop.</h5>
             </div>
             
             <div className='w-full lg:w-3/5 bg-gradient-to-r '>

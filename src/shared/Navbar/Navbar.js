@@ -50,7 +50,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className='flex'>
-                        <strong className="text-xl md:text-2xl lg:text-3xl font-semibold px-0 lg:px-2">Old Laptops Shop</strong>
+                        <strong className="text-xl md:text-2xl lg:text-3xl font-semibold px-0 lg:px-2">Used Laptops Shop</strong>
                         <p className='hidden lg:flex' title=''>{user?.displayName}</p>
                     </div>
                 </div>

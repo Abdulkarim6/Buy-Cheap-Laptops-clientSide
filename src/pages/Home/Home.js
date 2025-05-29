@@ -2,9 +2,9 @@ import React from 'react';
 import Advertised from '../../components/Advertised/Advertised';
 import Banner from '../../components/Banner/Banner';
 import Categories from '../../components/Categories/Categories';
-import Contuct from '../../components/Contuct/Contuct';
-import UserMassage from '../../components/UserMassage/UserMassage';
+import UserReviews from '../../components/UserReviews/UserReviews';
 import AllProducts from '../../components/AllProducts/AllProducts';
+import ReviewGetter from '../../components/ReviewGetter/ReviewGetter';
 
 const Home = () => {
     return (
@@ -13,8 +13,8 @@ const Home = () => {
             <Advertised></Advertised>
             {/* <Categories></Categories> */}
             <AllProducts></AllProducts>
-            <UserMassage></UserMassage>
-            <Contuct></Contuct>
+            <UserReviews></UserReviews>
+            <ReviewGetter></ReviewGetter>
         </div>
     );
 };
