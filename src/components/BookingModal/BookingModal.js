@@ -33,7 +33,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
         }
 
 
-        fetch('https://cheap-laptop-server-side.vercel.app/buyerBookingProducts', {
+        fetch('http://localhost:5000/buyerBookingProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -56,15 +56,16 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box relative">
+            <div className="modal ">
+                <div className="modal-box relative border-2 border-solid border-primary !rounded-none">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-                        <input name='name' type="text" placeholder="Your Name" className="input w-full borderd" />
+                        <input name='name' type="text" placeholder="Your Name" className="input w-full border-2 border-solid" />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full" />
                         <input name='email' type="text" defaultValue={user?.email} placeholder="Email Address" className="input w-full borderd" disabled />
-                        <input name='date' type="text" disabled value={date} className="input w-full  borderd " />
-                        <input name='productName' type="text" disabled value={title} className="input w-full  borderd " />
-                        <input name='sellPrice' type="text" disabled value={recelPrice} className="input w-full  borderd " />
+                        <input name='date' type="text" value={date} className="input w-full  borderd " disabled/>
+                        <input name='productName' type="text" value={title} className="input w-full  borderd " disabled/>
+                        <input name='sellPrice' type="text" value={recelPrice} className="input w-full  borderd " disabled/>
                         <input name='phone' type="text" placeholder="Phone Number" className="input w-full borderd" />
                         <input name='location' type="text" placeholder="Phone Location" className="input w-full borderd" />
                         <br />

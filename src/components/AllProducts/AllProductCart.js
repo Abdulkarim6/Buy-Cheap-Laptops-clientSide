@@ -1,10 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AllProductCart = ({product, setBookingProduct}) => {
 
     const { image, title, originalPrice,
         recelPrice, sellerName, usedTime, _id } = product;
+        
 
     return (
         <div data-aos="fade-down"

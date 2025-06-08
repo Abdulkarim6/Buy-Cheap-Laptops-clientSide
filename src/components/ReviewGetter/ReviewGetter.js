@@ -16,7 +16,7 @@ const ReviewGetter = () => {
         }
         // console.log(message);
         //save message to database
-        fetch('https://cheap-laptop-server-side.vercel.app/message', {
+        fetch('http://localhost:5000/message', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

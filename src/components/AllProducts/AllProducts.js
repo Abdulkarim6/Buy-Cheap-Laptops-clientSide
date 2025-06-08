@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AllProductCart from './AllProductCart';
 import BookingModal from '../BookingModal/BookingModal';
 
@@ -7,14 +7,14 @@ const AllProducts = () => {
       const [bookingProduct, setBookingProduct] = useState(null);
 
     /* loaded all products start here */
-        const url = (`https://cheap-laptop-server-side.vercel.app/allproducts`)
+        const url = (`http://localhost:5000/allproducts`)
     
         const { data: allproducts = [], refetch } = useQuery({
             queryKey: ['products'],
             queryFn: async () => {
                 const res = await fetch(url);
                 const data = await res.json();
-                console.log(data);
+               // console.log(data);
                 return data;
             }
         })

@@ -10,6 +10,9 @@ const ProductDetails = () => {
     const { email, image, location, title, originalPrice, postDate,
         recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = ProductDetails;
 
+    //console.log(_id);
+    
+
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const { user } = useContext(AuthContext);
@@ -39,7 +42,7 @@ const ProductDetails = () => {
         }
 
 
-        fetch('https://cheap-laptop-server-side.vercel.app/buyerBookingProducts', {
+        fetch('http://localhost:5000/buyerBookingProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

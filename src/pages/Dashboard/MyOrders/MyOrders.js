@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
     /* loaded all My products start here */
-    const url = (`https://cheap-laptop-server-side.vercel.app/myOrderProducts?email=${user?.email}`)
+    const url = (`http://localhost:5000/myOrderProducts?email=${user?.email}`)
   
     const { data: myOrderProducts = [] , isLoading} = useQuery({
         queryKey: ['myOrderProducts', user?.email],
@@ -28,7 +28,7 @@ const MyOrders = () => {
                 
                     !myOrderProducts.length ? 
                     
-                    <p className='text-lg lg:text-3xl font-medium text-center text-info mt-5'>You have no booked any Products</p>
+                    <p className='text-lg lg:text-3xl font-medium text-center mt-5'>You have no booked any Products</p>
                     
                     :
                     <div>

@@ -13,7 +13,7 @@ const MyProducts = () => {
 
     const { user } = useContext(AuthContext);
     /* loaded all My products start here */
-    const url = (`https://cheap-laptop-server-side.vercel.app/products?email=${user?.email}`)
+    const url = (`http://localhost:5000/products?email=${user?.email}`)
 
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
@@ -33,7 +33,7 @@ const MyProducts = () => {
 
     /* Delete My products operation start here  */
     const successDeleteAction = product => {
-        fetch(`https://cheap-laptop-server-side.vercel.app/product/${product._id}`, {
+        fetch(`http://localhost:5000/product/${product._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -55,7 +55,7 @@ const MyProducts = () => {
         const advertisProduct = { ...product, status: "advertised" }
         console.log(advertisProduct);
         if (advertisProduct) {
-            fetch('https://cheap-laptop-server-side.vercel.app/advertiseProduct', {
+            fetch('http://localhost:5000/advertiseProduct', {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
