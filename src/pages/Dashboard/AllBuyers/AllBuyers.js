@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
-    const role = 'Buyer';
+    const role = 'buyer';
     const url = (`http://localhost:5000/allBuyers?role=${role}`)
 
     const { data: allBuyers = [], refetch } = useQuery({

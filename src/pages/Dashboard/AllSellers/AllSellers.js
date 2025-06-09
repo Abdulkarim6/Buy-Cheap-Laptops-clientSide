@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 const AllSellers = () => {
-    const role = 'Seller';
+    const role = 'seller';
     const url = (`http://localhost:5000/allSellers?role=${role}`)
 
     const { data: allSellers = [], refetch } = useQuery({
@@ -35,7 +35,7 @@ const AllSellers = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    toast.success('Make Verify Successfully')
+                    toast.success('Verified Successfully')
                     refetch()
                 }
             })
