@@ -1,6 +1,7 @@
-export const saveUserData = (name, email, role) => {
-        const user = { name, email, role };
 
+export const saveUserData = (name, email, role) => {
+        const user = { name, email, role }; 
+   
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
@@ -9,5 +10,7 @@ export const saveUserData = (name, email, role) => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+
             });
-    };
+        
+};

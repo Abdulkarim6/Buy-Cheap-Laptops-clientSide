@@ -1,37 +1,54 @@
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { saveUserData } from "../../shared/Utils/Utils";
+import useSaveUserData from "../../hooks/useSaveUserData";
+import { useLocation, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 
 const SocialLogin = () => {
-    
-      const { updateUser , signInWithGoogle} = useContext(AuthContext);
+      const {signInWithGoogle} = useContext(AuthContext);
       const [signupError, setSignupError] = useState('');
+
+      const [name, setName] = useState("");
+      const [email, setEmail] = useState("");
+      const [role, setRole] = useState("");
+      let user;
+          if(name !== "" && email !== "" && role !== ""){
+             user = { name, email, role };
+          }
+      const [dataSaveSuccessFully] =  useSaveUserData(user);
+  
+      const location = useLocation();
+      const navigate = useNavigate();
+      let navigateInfo;
+      if(dataSaveSuccessFully === true){
+             navigateInfo = { email, location, navigate };
+      }
+      useToken(navigateInfo);
 
     const validRoles = ["seller", "buyer"];
     const handleLoginWithGoogle = (event) => {
         event.preventDefault();
         const role = event.target.role.value;
-        const normalizedRole = role.toLowerCase();
-        console.log(normalizedRole);
-        
+        const normalizedRole = role.toLowerCase();     
         setSignupError('');
         
         if (!validRoles.includes(normalizedRole)) {
-           //toast.error(`Must be input your role corractly!`);
            setSignupError(`Must be input your role corractly!`)
            return;
         }
         
             signInWithGoogle()
               .then((result) => {
-                const user = result.user;
-                toast.success(`${result?.user?.displayName} created account successfully`)
-                saveUserData(user.displayName, user.email, normalizedRole)
+                const user = result?.user;
+                toast.success(`${result?.user?.displayName} created account successfully`);
+                setName(user?.displayName);
+                setEmail(user?.email);
+                setRole(normalizedRole);
+
               }).catch((error) => {
                setSignupError(error.message)
               });
-       
     }
 
     return (

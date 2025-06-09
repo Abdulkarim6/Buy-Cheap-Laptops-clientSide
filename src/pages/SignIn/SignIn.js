@@ -3,9 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
-import useToken from '../../hooks/useToken';
-import { useEffect } from 'react';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import useToken from '../../hooks/useToken';
 
 
 const SignIn = () => {
@@ -14,27 +13,24 @@ const SignIn = () => {
     const { signIn} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
-    const [loginUserEmail, setLoginUserEmail] = useState('')
-    const [token] = useToken(loginUserEmail)
-
+    const [email, setLoginUserEmail] = useState("");
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || '/';
-
-    useEffect(() => {
-        if (token) {
-            navigate(from, { replace: true });
-        }
-    }, [navigate, token, from])
-
-
+    let navigateInfo;
+    if(email !== ""){
+        navigateInfo = { email, location, navigate };
+    }
+    useToken(navigateInfo)
+ 
     const handleLogin = data => {
         setLoginError('')
         signIn(data.email, data.password)
             .then((result) => {
                 const user = result.user;
+                console.log(user?.email);
+                
                 toast.success(`${user.displayName} Login Successfully`);
-                setLoginUserEmail(data.email)
+                setLoginUserEmail(user?.email)
             })
             .catch(error => {
                 setLoginError(error.code)
@@ -52,14 +48,16 @@ const SignIn = () => {
                         <label className="label"><span className="label-text text-base md:text-lg">Email</span></label>
                         <input type="text"
                             {...register("email")}
-                            placeholder="Your Email" className="input input-bordered w-full" required />
+                            placeholder="Your Email" className="input input-bordered w-full" required 
+                        />
                         {errors.email && <p className='text-red-600 font-semibold italic'>{errors.email?.message}</p>}
                     </div>
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text text-base md:text-lg">Password</span></label>
                         <input type="password"
                             {...register("password")}
-                            placeholder="Your Password" className="input input-bordered w-full" required/>
+                            placeholder="Your Password" className="input input-bordered w-full" required
+                        />
                         {errors.password && <p className='text-red-600 font-semibold italic'>{errors.password?.message}</p>}
                         <label className="label"><span className="label-text text-base md:text-lg">Forget Password ?</span></label>
                     </div>

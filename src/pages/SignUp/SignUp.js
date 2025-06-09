@@ -1,54 +1,50 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
-import { useEffect } from 'react';
 import { saveUserData } from '../../shared/Utils/Utils';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import useSaveUserData from '../../hooks/useSaveUserData';
 
 
 const SignUP = () => {
-    const { createUser, updateUser , signInWithGoogle} = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    console.log("errors", errors);
-    
-    const [signupError, setSignupError] = useState('');
-    // const [tagInputError, setTagInputError] = useState(false);
-    // console.log(tagInputError);
-    
-    const navigate = useNavigate();
-
-    const [newUserEmail, setNewUserEmail] = useState('');
-    const [token] = useToken(newUserEmail);
     const errorClass = "text-red-600 font-semibold bg-base-300 text-center rounded-lg mx-2 italic"
+    const { createUser, updateUser} = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [signupError, setSignupError] = useState('');
 
-    useEffect(() => {
-        if (token) {
-            navigate('/')
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [role, setRole] = useState("");
+    let user;
+        if(name !== "" && email !== "" && role !== ""){
+           user = { name, email, role };
         }
-    }, [navigate, token])
+    const [dataSaveSuccessFully] =  useSaveUserData(user);
 
-    // const validRoles = ["seller", "buyer"];
+    const location = useLocation();
+    const navigate = useNavigate();
+    let navigateInfo;
+    if(dataSaveSuccessFully === true){
+           navigateInfo = { email, location, navigate };
+    }
+    useToken(navigateInfo);
+    
     const handleSignup = data => {
         setSignupError('');
-        // setTagInputError(false);
         const { name, email, password, role } = data;
         const normalizedRole = role.toLowerCase();
-        // if (!validRoles.includes(normalizedRole)) {
-        //    //toast.error(`Must be input your role corractly!`);
-        //    setTagInputError(true)
-        //    return;
-        // }
 
         createUser(email, password)
             .then(result => {
                 updateUser({ displayName: name })
                     .then(() => {
                         toast.success(`${result?.user?.displayName} created account successfully`)
-                        saveUserData(name, email, normalizedRole);
-                        setNewUserEmail(email);
+                        setName(name);
+                        setEmail(email);
+                        setRole(normalizedRole);
                     })
                     .catch();
             })
