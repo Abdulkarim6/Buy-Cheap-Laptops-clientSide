@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import ProductDetails from "../../shared/ProductDetails/ProductDetails";
 import Blog from "../../components/Blog/Blog";
 import DisplayError from "../../components/DisplayError/DisplayError";
-import Products from "../../components/Products/Products";
 import DashboardLayout from "../../layout/DashboardLayout";
 import Main from "../../layout/Main";
 import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
@@ -16,6 +15,7 @@ import SignUP from "../../pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import ProductsOfCategory from "../../components/ProductsOfCategory/ProductsOfCategory";
 
 const router = createBrowserRouter([
     {
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
             { path: '/', element: <Home></Home> },
             { path: '/blog', element: <Blog></Blog> },
             {
-                path: '/products/:id', element: <PrivateRoute><Products></Products></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                path: '/products/:id', element: <PrivateRoute><ProductsOfCategory></ProductsOfCategory></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/productsOfCategory/${params.id}`)
             },
             {
                 path: `/ProductDetails/:id`, element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,

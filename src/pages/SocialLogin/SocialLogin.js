@@ -53,15 +53,15 @@ const SocialLogin = () => {
 
     return (
         <div>
-                <form onSubmit={handleLoginWithGoogle} className=" w-full">
-                    <label className="label py-0"><span className="label-text text-base md:text-lg">Choose your Role</span></label>
-                    <input type="text" placeholder="Seller/Buyer" name='role' className="input input-bordered w-full" required/>
-                    
-                {
-                    signupError && <p className='text-red-600 font-semibold bg-base-300 text-center rounded-lg mx-2 italic'>{signupError}</p>
-                }
-                    <input type="submit" className='btn btn-sm md:btn-md btn-primary mt-2 w-full' value='Continue with google' />
-                </form>
+            <form onSubmit={handleLoginWithGoogle} className=" w-full">
+                <label className="label py-0"><span className="label-text text-base md:text-lg">Choose your Role</span></label>
+                <input type="text" placeholder="Seller/Buyer" name='role' className="input input-bordered w-full" required/>
+                
+            {
+                signupError && <p className='text-red-600 font-semibold bg-base-300 text-center rounded-lg mx-2 italic'>{signupError}</p>
+            }
+                <input type="submit" className='btn btn-sm md:btn-md btn-primary mt-2 w-full' value='Continue with google' />
+            </form>
         </div>
     );
 };

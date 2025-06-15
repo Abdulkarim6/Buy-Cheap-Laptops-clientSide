@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../BookingModal/BookingModal';
-import ProductCart from '../ProductCart/ProductCart';
+import ProductCartOFCategory from '../ProductCartOFCategory/ProductCartOFCategory';
 
-const Products = () => {
+const ProductsOfCategory = () => {
     const products = useLoaderData();
     const [bookingProduct, setBookingProduct] = useState(null);
 
     return (
-        <div className='mx-auto bg-base-200'>
-            <h1 className="text-3xl mt-2 font-bold underline text-center bg-cyan-300 py-2 font-serif">Our Products</h1>
-            <div className='grid lg:grid-cols-2 gap-6 p-6 '>
+        <div className='mx-auto'>
+            <h1 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">Search results</h1>
+            <div className='grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-2 md:px-6'>
                 {
-                    products.map(product => <ProductCart
+                    products?.map(product => <ProductCartOFCategory
                         key={product._id}
                         setBookingProduct={setBookingProduct}
                         product={product}
-                    ></ProductCart>)
+                    ></ProductCartOFCategory>)
                 }
             </div>
             {
@@ -31,4 +31,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default ProductsOfCategory;

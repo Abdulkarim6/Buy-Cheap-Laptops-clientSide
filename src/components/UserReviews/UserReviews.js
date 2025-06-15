@@ -20,7 +20,7 @@ const UserReviews = () => {
                     <h2 className="text-xl font-semibold">Our Coustomers Reviews</h2>
                 </div>
             </div>
-            <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 p-6'>
+            <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 p-2 md:p-4'>
                 {
                     messages.map(message =>
                         <div key={message._id} className="card bg-base-100 shadow-xl">
