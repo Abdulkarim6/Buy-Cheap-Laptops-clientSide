@@ -5,6 +5,12 @@
 ### `Admin`
 email : karim@gmail.com
 pass : karim12@#
+### `seller`
+email : karim1@gmail.com
+pass : 123123
+### `buyer`
+email : karim2@gmail.com
+pass : 123123
 
 ### `Features`
 .Firebase authentication

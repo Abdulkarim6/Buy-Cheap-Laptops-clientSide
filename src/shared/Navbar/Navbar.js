@@ -23,7 +23,7 @@ const Navbar = () => {
     const { data: categories = [] } = useQuery({
             queryKey: ['categories'],
             queryFn: async () => {
-                const res = await fetch('http://localhost:5000/categories');
+                const res = await fetch('https://cheap-laptop-server-side.vercel.app/categories');
                 const data = await res.json();
                 return data;
     
@@ -31,15 +31,14 @@ const Navbar = () => {
     });
 
     const [selectedCategory, setSelectedCategory] = useState('');
-    console.log(selectedCategory);
-    
+ 
     const handleCategoryChange = (event) => {
       setSelectedCategory(event.target.value);
     };
 
     let searchBoxContent = 
                 <form className='p-0 w-[86%] rounded-md flex'>
-                  <select className='w-full text-black rounded-none !rounded-l-md' required
+                 <select className='w-full text-black rounded-none !rounded-l-md' required
                   onChange={handleCategoryChange}
                   value={selectedCategory} 
                   >
@@ -84,7 +83,7 @@ const Navbar = () => {
                                 <HiMiniBars3 className="h-6 w-6 md:h-7 md:w-7" />
                             }
                         </label>
-                        <ul className={`${buttonClass} absolute top-14 text-lg px-3 py-5 w-48 shadow bg-black rounded `}>
+                        <ul className={`${buttonClass} absolute top-14 text-lg px-3 py-5 w-48 shadow bg-sky-500 rounded `}>
                             {menuItems} 
                         </ul>
                     </div>

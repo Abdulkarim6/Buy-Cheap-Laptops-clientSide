@@ -6,12 +6,9 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const ProductDetails = () => {
     const ProductDetails = useLoaderData();
-    console.log(ProductDetails,'9');
     const { email, image, location, title, originalPrice, postDate,
-        recelPrice, sellerName, usedTime, _id, Phone, Condition, Description } = ProductDetails;
-
-    //console.log(_id);
-    
+        recelPrice, sellerName, usedTime, Phone, Condition, Description } = ProductDetails;
+ 
 
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
@@ -42,7 +39,7 @@ const ProductDetails = () => {
         }
 
 
-        fetch('http://localhost:5000/buyerBookingProducts', {
+        fetch('https://cheap-laptop-server-side.vercel.app/buyerBookingProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

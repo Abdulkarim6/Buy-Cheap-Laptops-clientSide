@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
-import { saveUserData } from '../../shared/Utils/Utils';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import useSaveUserData from '../../hooks/useSaveUserData';
 
@@ -98,7 +97,9 @@ const SignUP = () => {
                 }
                 <p>Allready have an account?<Link to='/signin' className='text-blue-900 underline ml-2'>Please Login</Link> </p>
                 
-                <SocialLogin></SocialLogin>
+                <SocialLogin
+                   currentPath="signUp"
+                ></SocialLogin>
             </div>
         </div>
     );

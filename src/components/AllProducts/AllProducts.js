@@ -7,14 +7,13 @@ const AllProducts = () => {
       const [bookingProduct, setBookingProduct] = useState(null);
 
     /* loaded all products start here */
-        const url = (`http://localhost:5000/allproducts`)
+        const url = (`https://cheap-laptop-server-side.vercel.app/allproducts`)
     
-        const { data: allproducts = [], refetch } = useQuery({
+        const { data: allproducts = [] } = useQuery({
             queryKey: ['products'],
             queryFn: async () => {
                 const res = await fetch(url);
                 const data = await res.json();
-               // console.log(data);
                 return data;
             }
         })

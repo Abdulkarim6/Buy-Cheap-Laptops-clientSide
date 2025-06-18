@@ -52,7 +52,7 @@ const DashboardLayout = () => {
 
                         {/* dashboard icon */}
                         {/* <div className='fixed lg:hidden top-16 right-0 bg-purple-400' onClick={() => dashboardMenuShow()}> */}
-                        <div className='fixed lg:hidden top-16 right-0 bg-purple-400' onClick={() => dashboardMenuShow()}>
+                        <div className='fixed lg:hidden top-[88px] md:top-28 right-0 bg-sky-500' onClick={() => dashboardMenuShow()}>
                             {
                                <label htmlFor="" className="btn btn-ghost">
                                         {

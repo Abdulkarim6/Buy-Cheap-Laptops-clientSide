@@ -27,7 +27,6 @@ const SignIn = () => {
         signIn(data.email, data.password)
             .then((result) => {
                 const user = result.user;
-                console.log(user?.email);
                 
                 toast.success(`${user.displayName} Login Successfully`);
                 setLoginUserEmail(user?.email)
@@ -68,7 +67,9 @@ const SignIn = () => {
                 </form>
                 <p className='text-base md:text-lg'>You are new in this site?<Link to='/signup' className='text-blue-900 underline ml-2'>create new account</Link> </p>
             
-               <SocialLogin></SocialLogin>
+               <SocialLogin
+                currentPath="signIn"
+               ></SocialLogin>
             </div>
         </div>
     );

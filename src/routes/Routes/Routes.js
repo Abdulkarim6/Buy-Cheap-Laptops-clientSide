@@ -26,11 +26,11 @@ const router = createBrowserRouter([
             { path: '/blog', element: <Blog></Blog> },
             {
                 path: '/products/:id', element: <PrivateRoute><ProductsOfCategory></ProductsOfCategory></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/productsOfCategory/${params.id}`)
+                loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/productsOfCategory/${params.id}`)
             },
             {
                 path: `/ProductDetails/:id`, element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/ProductDetails/${params.id}`)
+                loader: ({ params }) => fetch(`https://cheap-laptop-server-side.vercel.app/ProductDetails/${params.id}`)
             },
             {
                 path: '/signup', element: <SignUP></SignUP>

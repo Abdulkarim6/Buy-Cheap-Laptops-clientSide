@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
     /* loaded all My products start here */
-    const url = (`http://localhost:5000/myOrderProducts?email=${user?.email}`)
+    const url = (`https://cheap-laptop-server-side.vercel.app/myOrderProducts?email=${user?.email}`)
   
     const { data: myOrderProducts = [] , isLoading} = useQuery({
         queryKey: ['myOrderProducts', user?.email],
@@ -17,8 +17,7 @@ const MyOrders = () => {
         }
     });
 
-    console.log(isLoading, "loader");
-
+   
     return (
         <section>
             {
@@ -26,14 +25,9 @@ const MyOrders = () => {
                 <button className="btn btn-info loading flex justify-self-center mt-2 lg:mt-4">loading</button>
                 :
                 
-                    !myOrderProducts.length ? 
-                    
-                    <p className='text-lg lg:text-3xl font-medium text-center mt-5'>You have no booked any Products</p>
-                    
-                    :
-                    <div>
-                    <h2 className="text-lg lg:text-3xl text-center py-2 font-semibold">Your Booked product list</h2>
-                         <table className="w-full font-medium">
+                <div>
+                     <p className='text-lg lg:text-3xl font-medium text-center mt-5'>{!myOrderProducts.length ?  `You have no booked any Products` : `Your Booked product list`}</p>
+                       <table className="w-full font-medium">
                                 <thead className=''>
                                     <tr className='text-sm md:text-base'>
                                         <th className="invisible">quan</th>

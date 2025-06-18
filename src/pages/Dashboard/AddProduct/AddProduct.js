@@ -12,23 +12,19 @@ const AddProduct = () => {
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const imageHostKey = process.env.REACT_APP_imagebb_key;
     const { user } = useContext(AuthContext);
-    // console.log('user', user?.displayName, user?.email, date);
-
+   
     //for get productCategorys from database
     const { data: productCategorys = [], isLoading } = useQuery({
         queryKey: ['productCategorys'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/productCategorys');
+            const res = await fetch('https://cheap-laptop-server-side.vercel.app/productCategorys');
             const data = await res.json();
             return data;
         }
 
     });
-    // console.log(productCategorys);
-
+  
     const handleAddProduct = data => {
-        // console.log('data', data);
-
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -40,8 +36,7 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(imageData => {
-                // console.log(imageData.data.url);
-
+              
                 const addedProduct = {
                     sellerName: user?.displayName,
                     email: user?.email,
@@ -58,9 +53,9 @@ const AddProduct = () => {
                     title: data.title,
                     usedTime: data.usedTime
                 }
-                // console.log(addedProduct);
+               
                 //save A New Add Product to database
-                fetch('http://localhost:5000/addedProduct', {
+                fetch('https://cheap-laptop-server-side.vercel.app/addedProduct', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
@@ -70,8 +65,7 @@ const AddProduct = () => {
                 })
                     .then(res => res.json())
                     .then(result => {
-                        // console.log(result);
-                        if (result.acknowledged) {
+                       if (result.acknowledged) {
                             toast.success(`${user?.displayName} added Product successfully`);
                             navigate('/dashboard/myProducts')
                         }
@@ -86,7 +80,7 @@ const AddProduct = () => {
 
     return (
         <div>
-            <h2 className="text-4xl text-center bg-base-300 text-base-content py-2 font-semibold">You Can Add A product</h2>
+            <h2 className="text-lg lg:text-3xl font-medium text-center mt-5">Add a product</h2>
             <div className=' flex justify-center items-center'>
                 <div className=' borderd my-7'>
                     <form onSubmit={handleSubmit(handleAddProduct)}>
@@ -164,7 +158,7 @@ const AddProduct = () => {
                             </div>
                         </div>
                         {/* Second part End */}
-                        <input type="submit" className='btn btn-accent w-full' value='Add Product' />
+                        <input type="submit" className='btn btn-primary w-full' value='Add Product' />
                     </form>
                 </div>
             </div>

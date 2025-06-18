@@ -14,9 +14,8 @@ const ReviewGetter = () => {
             email: user?.email,
             message: data.message
         }
-        // console.log(message);
         //save message to database
-        fetch('http://localhost:5000/message', {
+        fetch('https://cheap-laptop-server-side.vercel.app/message', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -25,7 +24,6 @@ const ReviewGetter = () => {
         })
             .then(res => res.json())
             .then(result => {
-                // console.log(result);
                 if (result.acknowledged) {
                     toast.success(`Thankyou for share your experience`);
                 }

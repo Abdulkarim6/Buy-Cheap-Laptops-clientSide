@@ -5,6 +5,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStat
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -39,7 +40,6 @@ const AuthProvider = ({ children }) => {
   
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            // console.log('user observing');
             setUser(currentUser);
             setLoading(false)
         })
