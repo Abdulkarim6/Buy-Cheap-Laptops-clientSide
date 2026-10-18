@@ -14,16 +14,16 @@ const UserReviews = () => {
         }
     })
     return (
-        <section className='my-8 bg-white p-3 rounded-r-full rounded-s-md'>
+        <section className='my-8 p-3 rounded-r-full rounded-s-md'>
             <div className='flex justify-between'>
                 <div>
-                    <h2 className="text-xl font-semibold">Our Coustomers Reviews</h2>
+                    <h2 className="text-xl font-semibold">Our Customer Reviews</h2>
                 </div>
             </div>
             <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 p-2 md:p-4'>
                 {
                     messages.map(message =>
-                        <div key={message._id} className="card bg-base-100 shadow-xl">
+                        <div key={message._id} className="card bg-slate-800 shadow-2xl">
                             <div className="card-body">
                                 <p>{message.message}</p>
                                 <div className="card-actions justify-between">

@@ -13,8 +13,8 @@ const Advertised = () => {
     });
     return (
         <div>
-            <h2 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">Suggest You</h2>
-            <div className='grid gap-3 md:grid-cols-2 lg:grid-cols-3 lg:px-8'>
+            <h2 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">Suggested You</h2>
+            <div className='grid gap-3 md:grid-cols-2 lg:grid-cols-4 lg:px-8'>
                 {
                     advertiseProducts?.map(advertiseProduct => <AdvertisedCard
                         key={advertiseProduct._id}

@@ -32,24 +32,24 @@ const ReviewGetter = () => {
 
     return (
         <div className='my-3 flex justify-center items-center text-black bg-fixed rounded'  style={{backgroundImage : `url(https://i.ibb.co/WK62JgX/banner2.jpg)`, backgroundSize : "cover", backgroundPosition : 'center'}}>
-            <div className='borderd'>
-                <h4 className="text-xl lg:text-2xl font-bold">Please ! Share your experience about this site</h4>
+            <div className='borderd my-5 md:my-6'>
+                <h4 className="text-xl lg:text-3xl font-bold">Please ! Share your experience about this site</h4>
                 <form onSubmit={handleSubmit(handleFindUsersMessage)}>
                     <div className="form-control w-full">
-                        <label className="label"><span className="label-text text-white text-base">Your Name</span></label>
+                        <label className="label"><span className="label-text text-black font-semibold text-base">Your Name</span></label>
                         <input type="text"
                             {...register("name", { required: 'Name is required' })}
                             placeholder="Your Name" className="input input-bordered w-full" />
                         {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                     </div>
                     <div className="form-control w-full">
-                        <label className="label"><span className="label-text text-white text-base">Your Message</span></label>
+                        <label className="label"><span className="label-text text-black font-semibold text-base">Your Message</span></label>
                         <textarea
                             {...register("message", { required: 'Message is required' })}
                             className="textarea textarea-primary" placeholder="Your Message"></textarea>
                         {errors.message && <p className='text-red-600'>{errors.message?.message}</p>}
                     </div>
-                    <input type="submit" className='btn btn-accent w-full mt-3' value='Send' />
+                    <input type="submit" className='btn btn-secondary bg-blue-500 hover:bg-blue-600 w-full mt-3' value='Send' />
                 </form>
             </div>
         </div>

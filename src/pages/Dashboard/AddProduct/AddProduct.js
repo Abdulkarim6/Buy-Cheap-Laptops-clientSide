@@ -17,12 +17,15 @@ const AddProduct = () => {
     const { data: productCategorys = [], isLoading } = useQuery({
         queryKey: ['productCategorys'],
         queryFn: async () => {
-            const res = await fetch('https://cheap-laptop-server-side.vercel.app/productCategorys');
+            const res = await fetch("http://localhost:5000/categories");
             const data = await res.json();
+            console.log(data);
             return data;
         }
 
     });
+
+    console.log(productCategorys);
   
     const handleAddProduct = data => {
         const image = data.image[0];
@@ -111,7 +114,7 @@ const AddProduct = () => {
                                             productCategorys.map(productCategory => <option
                                                 key={productCategory._id}
                                                 value={productCategory.id}
-                                            >{productCategory.id}</option>)
+                                            >{productCategory?.name}</option>)
                                         }
                                     </select>
                                     {errors.productCategory && <p className='text-red-500'>{errors.productCategory.message}</p>}
@@ -147,7 +150,7 @@ const AddProduct = () => {
                                 </div>
                                 <div className="form-control w-full">
                                     <label className="label"><span className="label-text">Year of purchase</span></label>
-                                    <input type="text" {...register("purchase", { required: 'Year of purchase required' })} placeholder=" dd/mm/yy " className="input input-bordered input-primary w-full" />
+                                    <input type="text" {...register("purchase", { required: 'Year of purchase required' })} placeholder="dd/mm/yy " className="input input-bordered input-primary w-full" />
                                     {errors.purchase && <p className='text-red-500'>{errors.purchase.message}</p>}
                                 </div>
                                 <div className="form-control w-full">

@@ -32,12 +32,14 @@ const Banner = () => {
 
     return (
         <div className='flex flex-col lg:flex-row-reverse rounded-md'>
-            <div className='flex flex-col  w-full lg:w-2/5 py-6'>
-                <h3 className=" text-2xl md:text-3xl lg:text-4xl font-bold font-serif ml-5">Wellcome to Our</h3>
-                <h3 className="md:text-center text-2xl md:text-3xl lg:text-4xl font-bold font-serif  ml-28 italic">Old Laptops Shop</h3>
-                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>You can create an account here as a buyer or seller.</h5>
-                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>As a buyer, You can buy your preferred laptop at a low price.</h5>
-                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px]'/>As a seller, You can sell your Used laptop.</h5>
+            <div className='flex flex-col w-full lg:w-2/5 py-6'>
+                <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold font-sans ml-5">Welcome to Our</h3>
+                <h3 className="md:text-center text-2xl md:text-3xl lg:text-5xl font-bold font-sans ml-28 italic">Old Laptops Shop</h3>
+                <div className='font-sans mt-3'>  
+                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px] mr-2'/>You can create an account here as a buyer or seller.</h5>
+                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px] mr-2'/>As a buyer, You can buy your preferred laptop at a low price.</h5>
+                <h5 className='flex text-lg md:text-xl'><MdSend className='mt-[6px] mr-2'/>As a seller, You can sell your Used laptop.</h5>
+                </div>
             </div>
             
             <div className='w-full lg:w-3/5 bg-gradient-to-r '>

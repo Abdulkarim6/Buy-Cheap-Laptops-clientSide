@@ -14,16 +14,16 @@ const AdvertisedCard = ({ advertiseProduct }) => {
         <div data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1000">
-            <div className="card bg-base-100 shadow-xl" >
-                <figure><img src={image} className='h-56' alt="" /></figure>
-                <div className="card-body p-3 !pt-0">
-                    <h2 className="card-title text-lg lg:text-3xl font-semibold">
+            <div className="card bg-slate-800 shadow-xl" >
+                <figure className='bg-slate-300'><img src={image} className='h-64' alt="" /></figure>
+                <div className="card-body pl-2">
+                    <h2 className="card-title text-lg md:text-xl font-semibold">
                         {title}
                     </h2>
-                    <div className='text-lg'> 
-                        <strong><p>Sell Price : {recelPrice}</p></strong>
+                    <div className='text-base md:text-lg'> 
+                        <p>Sell Price : <span className='text-cyan-400 font-bold'>৳ {recelPrice}</span></p>
                      </div>
-                    <Link to={`/ProductDetails/${_id}`}><button className="btn btn-outline btn-primary">Product Details</button></Link>
+                    <Link to={`/ProductDetails/${_id}`}><button type='button' className="p-2 bg-cyan-500 rounded-lg border border-slate-600 text-black hover:text-white hover:bg-cyan-800 font-semibold transition-all ease-linear"> Details</button></Link>
                 </div>
             </div>
         </div>
