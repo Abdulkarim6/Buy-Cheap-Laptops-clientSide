@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const ProductCartOFCategory = ({ product, setBookingProduct }) => {
+const ProductCartOfACategory = ({ product, setBookingProduct }) => {
 
     const { image, title, recelPrice, _id } = product;
 
@@ -21,4 +21,4 @@ const ProductCartOFCategory = ({ product, setBookingProduct }) => {
     );
 };
 
-export default ProductCartOFCategory;
+export default ProductCartOfACategory;

@@ -1,10 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AllProductCart from './AllProductCart';
 import BookingModal from '../BookingModal/BookingModal';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AllProducts = () => {
       const [bookingProduct, setBookingProduct] = useState(null);
+      const { user } = useContext(AuthContext);
+      const srclocation = useLocation();
+      const navigate = useNavigate();
+      
+      useEffect(() =>{
+        if(bookingProduct){
+            if (!user) {
+                navigate("/signIn", {state:{from:srclocation}})
+            }
+        }
+      },[bookingProduct, srclocation, user, navigate])
 
     /* loaded all products start here */
         const url = (`https://cheap-laptop-server-side.vercel.app/allproducts`)
@@ -17,7 +30,7 @@ const AllProducts = () => {
                 return data;
             }
         })
-        /* loaded all products End Here */
+    /* loaded all products End Here */
 
     return (
         <div className='mx-auto'>

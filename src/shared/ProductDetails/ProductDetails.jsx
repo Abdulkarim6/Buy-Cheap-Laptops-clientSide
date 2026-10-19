@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import BookingForm from '../../components/BookingModal/BookingForm';
 
@@ -10,13 +10,21 @@ const ProductDetails = () => {
     const { email, image, location, title, originalPrice, postDate,
         recelPrice, sellerName, usedTime, Phone, Condition, Description } = ProductDetails;
  
-
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const { user } = useContext(AuthContext);
 
+    const srcLocation = useLocation();
+    const navigate = useNavigate();
+
     const handleBooking = event => {
         event.preventDefault();
+
+        if (!user) {
+            navigate("/signIn", { state: { from: srcLocation } });
+            return;
+        }
+
         const form = event.target;
         const userName = form.name.value;
         const buyerEmail = form.email.value;

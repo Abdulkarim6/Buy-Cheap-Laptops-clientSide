@@ -15,7 +15,11 @@ const SignIn = () => {
 
     const [email, setLoginUserEmail] = useState("");
     const location = useLocation();
+    const fromLocation = location?.state?.from?.pathname || "/";
     const navigate = useNavigate();
+
+    console.log(location);
+
     let navigateInfo;
     if(email !== ""){
         navigateInfo = { email, location, navigate };
@@ -27,9 +31,9 @@ const SignIn = () => {
         signIn(data.email, data.password)
             .then((result) => {
                 const user = result.user;
-                
                 toast.success(`${user.displayName} Login Successfully`);
                 setLoginUserEmail(user?.email)
+                navigate(fromLocation, {replace:true})
             })
             .catch(error => {
                 setLoginError(error.code)
