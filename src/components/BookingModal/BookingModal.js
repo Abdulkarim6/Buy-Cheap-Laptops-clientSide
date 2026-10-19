@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import BookingForm from './BookingForm';
 
 const BookingModal = ({ bookingProduct, setBookingProduct }) => {
-    const { id, title, recelPrice, email, image } = bookingProduct;
+    const {email, image } = bookingProduct;
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const { user } = useContext(AuthContext);
@@ -55,24 +56,31 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
 
     return (
         <>
-            <input type="checkbox" id="booking-modal" className="modal-toggle" />
-            <div className="modal ">
-                <div className="modal-box relative border-2 border-solid border-primary !rounded-none">
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-                        <input name='name' type="text" placeholder="Your Name" className="input w-full border-2 border-solid" />
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full" />
-                        <input name='email' type="text" defaultValue={user?.email} placeholder="Email Address" className="input w-full borderd" disabled />
-                        <input name='date' type="text" value={date} className="input w-full  borderd " disabled/>
-                        <input name='productName' type="text" value={title} className="input w-full  borderd " disabled/>
-                        <input name='sellPrice' type="text" value={recelPrice} className="input w-full  borderd " disabled/>
-                        <input name='phone' type="text" placeholder="Phone Number" className="input w-full borderd" />
-                        <input name='location' type="text" placeholder="Phone Location" className="input w-full borderd" />
-                        <br />
-                        <input type="submit" value="Submit" className='btn btn-accent ' />
-                    </form>
-                </div>
+        <input type="checkbox" id="booking-modal" className="modal-toggle" />
+        <div className="modal backdrop-blur-sm bg-black/60">
+            <div className="modal-box relative bg-slate-800 border border-slate-700 text-slate-100 rounded-2xl shadow-2xl p-5 max-w-lg">
+                
+                {/* Close Button */}
+                <label 
+                    htmlFor="booking-modal" 
+                    className="btn btn-sm btn-circle absolute right-3 top-3 bg-slate-700 border-none text-slate-300 hover:bg-slate-600 hover:text-white"
+                >
+                    ✕
+                </label>
+        
+                {/* Modal Title */}
+                <h3 className="text-xl font-bold text-white border-b border-slate-700 pb-3 mb-4">
+                    Book Laptop
+                </h3>
+        
+                <BookingForm
+                 bookingProduct={bookingProduct}
+                 handleBooking={handleBooking}
+                 user={user}
+                 date={date}
+                />
             </div>
+        </div>
         </>
     );
 };

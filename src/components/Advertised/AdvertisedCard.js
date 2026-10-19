@@ -14,7 +14,7 @@ const AdvertisedCard = ({ advertiseProduct }) => {
         <div data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1000">
-            <div className="card bg-slate-800 shadow-xl" >
+            <div className="card bg-slate-800 shadow-xl p-1" >
                 <figure className='bg-slate-300'><img src={image} className='h-64' alt="" /></figure>
                 <div className="card-body pl-2">
                     <h2 className="card-title text-lg md:text-xl font-semibold">
