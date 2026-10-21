@@ -7,30 +7,25 @@ import useToken from '../../hooks/useToken';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import useSaveUserData from '../../hooks/useSaveUserData';
 
-
 const SignUP = () => {
-    const errorClass = "text-red-600 font-semibold bg-base-300 text-center rounded-lg mx-2 italic"
-    const { createUser, updateUser} = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext);
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [signupError, setSignupError] = useState('');
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [role, setRole] = useState("");
-    let user;
-        if(name !== "" && email !== "" && role !== ""){
-           user = { name, email, role };
-        }
-    const [dataSaveSuccessFully] =  useSaveUserData(user);
+    const selectedRole = watch("role");
+
+    const [userData, setUserData] = useState({ name: "", email: "", role: "" });
+    const [dataSaveSuccessFully] = useSaveUserData(userData); // Stored new user data in database
 
     const location = useLocation();
     const navigate = useNavigate();
-    let navigateInfo;
-    if(dataSaveSuccessFully === true){
-           navigateInfo = { email, location, navigate };
+
+    let navigateInfo = null;
+    if (dataSaveSuccessFully && userData?.email) {
+        navigateInfo = { email: userData.email, location, navigate };
     }
     useToken(navigateInfo);
-    
+
     const handleSignup = data => {
         setSignupError('');
         const { name, email, password, role } = data;
@@ -38,68 +33,125 @@ const SignUP = () => {
 
         createUser(email, password)
             .then(result => {
-                updateUser({ displayName: name })
+                if(result?.user){
+                    updateUser({ displayName: name })
                     .then(() => {
-                        toast.success(`${result?.user?.displayName} created account successfully`)
-                        setName(name);
-                        setEmail(email);
-                        setRole(normalizedRole);
+                        toast.success(`${name} created account successfully`);
+                        
+                        setUserData({
+                            name,
+                            email,
+                            role: normalizedRole
+                        });
                     })
-                    .catch();
+                    .catch(err => setSignupError(err.message));
+                }
             })
-            .catch(err => {
-                setSignupError(err.message)
-            })
+            .catch(error => {
+               if (error.code === 'auth/network-request-failed') {
+                   setSignupError("Check your network connection and try again.");
+               } else {
+                   setSignupError(error.code);
+                    }
+                });
     };
 
-    
-
     return (
-        <div className='my-6 flex flex-col justify-center items-center'>
-            <div className='w-96 borderd'>
-                <h2 className="text-4xl font-semibold text-center ">SignUp</h2>
-                <form onSubmit={handleSubmit(handleSignup)}>
-                    <div className="form-control w-full">
-                        <label className="label"><span className="label-text text-base md:text-lg">Name</span></label>
-                        <input type="text" {...register("name", { required: 'name is Required' })} placeholder="Your Name" className="input input-bordered w-full" required/>
-                        {/* {errors.name && <p className={errorClass}>{errors.name.message}</p>} */}
-                    </div>
-
-                    <div className="form-control w-full">
-                        <label className="label"><span className="label-text text-base md:text-lg">Email</span></label>
-                        <input type="text" {...register("email")} placeholder="Your Email" className="input input-bordered w-full" required/>
-                    </div>
-
-                    <div className="form-control w-full">
-                        <label className="label"><span className="label-text text-base md:text-lg">Choose your Role</span></label>
-                        <input type="text" {...register("role", 
-                            { validate:(value)=>  
-                                    ["seller", "buyer"].includes(value.toLowerCase()) ||
-                                    "Must be input your role correctly!"
-                            })}
-                            placeholder="Seller/Buyer" className="input input-bordered w-full" required
-                        />
-                       {errors.role && <p className={errorClass}>{errors.role.message}</p>}
-                     </div>
-
-                    <div className="form-control w-full mb-3">
-                        <label className="label"><span className="label-text text-base md:text-lg">Password</span></label>
-                        <input type="password" {...register("password", {
-                            minLength: { value: 6, message: 'password must be 6 charecters long' }})}
-                            placeholder="Your Password" className="input input-bordered w-full" required
-                        />
-                        {errors.password && <p className={errorClass}>{errors.password.message}</p>}
-                    </div>
-                    <input type="submit" className='btn btn-sm md:btn-md btn-primary w-full' value='SignUp' />
-                </form>
-                {
-                    signupError && <p className={errorClass}>{signupError}</p>
-                }
-                <p>Allready have an account?<Link to='/signin' className='text-blue-900 underline ml-2'>Please Login</Link> </p>
+        <div className='min-h-[80vh] flex justify-center items-center px-4 my-6'>
+            <div className='w-full max-w-md border border-slate-700 bg-slate-800/90 shadow-2xl p-8 rounded-2xl text-slate-100 backdrop-blur-md'>
                 
-                <SocialLogin
-                   currentPath="signUp"
-                ></SocialLogin>
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-6">SignUp</h2>
+                
+                <form onSubmit={handleSubmit(handleSignup)} className="space-y-2">
+                    
+                    {/* Name Field */}
+                    <div className="form-control w-full">
+                        <label className="label pb-1">
+                            <span className="label-text text-slate-300 font-medium">Name</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            {...register("name", { required: 'Name is required' })} 
+                            placeholder="Your Name" 
+                            className="input w-full bg-slate-900 border border-slate-700 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none rounded-lg text-sm" 
+                        />
+                        {errors.name && <p className='text-red-400 text-xs mt-1 font-medium'>{errors.name.message}</p>}
+                    </div>
+
+                    {/* Email Field */}
+                    <div className="form-control w-full">
+                        <label className="label pb-1">
+                            <span className="label-text text-slate-300 font-medium">Email</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            {...register("email", { required: 'Email is required' })} 
+                            placeholder="Your Email" 
+                            className="input w-full bg-slate-900 border border-slate-700 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none rounded-lg text-sm" 
+                        />
+                        {errors.email && <p className='text-red-400 text-xs mt-1 font-medium'>{errors.email.message}</p>}
+                    </div>
+
+                    {/* Role Field (Dropdown UI for better UX) */}
+                    <div className="form-control w-full">
+                        <label className="label pb-1">
+                            <span className="label-text text-slate-300 font-medium">Choose your Role</span>
+                        </label>
+                        <select 
+                            {...register("role", { required: 'Role selection is required' })}
+                            className="select w-full bg-slate-900 border border-slate-700 text-slate-100 focus:border-cyan-400 focus:outline-none rounded-lg text-sm"
+                            defaultValue=""
+                        >
+                            <option value="" disabled hidden>Select Role</option>
+                            <option value="buyer">Buyer</option>
+                            <option value="seller">Seller</option>
+                        </select>
+                        {errors.role && <p className='text-red-400 text-xs mt-1 font-medium'>{errors.role.message}</p>}
+                    </div>
+
+                    {/* Password Field */}
+                    <div className="form-control w-full">
+                        <label className="label pb-1">
+                            <span className="label-text text-slate-300 font-medium">Password</span>
+                        </label>
+                        <input 
+                            type="password" 
+                            {...register("password", { 
+                                required: 'Password is required',
+                                minLength: { value: 6, message: 'Password must be at least 6 characters long' }
+                            })} 
+                            placeholder="Your Password" 
+                            className="input w-full bg-slate-900 border border-slate-700 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none rounded-lg text-sm" 
+                        />
+                        {errors.password && <p className='text-red-400 text-xs mt-1 font-medium'>{errors.password.message}</p>}
+                    </div>
+
+                    {/* Submit Button */}
+                    <input 
+                        type="submit" 
+                        className='btn bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold border-none rounded-lg w-full transition-all duration-200 mt-2 cursor-pointer' 
+                        value='SIGN UP' 
+                    />
+
+                    {/* Error Message */}
+                    {signupError && <p className='text-red-400 text-xs font-medium text-center mt-2'>{signupError}</p>}
+                </form>
+
+                <p className='text-sm text-slate-400 mt-3'>
+                    Already have an account? 
+                    <Link to='/signin' className='text-cyan-400 hover:underline font-medium ml-1'>
+                        Please Login
+                    </Link> 
+                </p>
+
+                {/* OR Divider */}
+                <div className="relative flex py-2 items-center">
+                    <div className="flex-grow border-t border-slate-700"></div>
+                    <span className="flex-shrink mx-3 text-slate-500 text-xs">OR</span>
+                    <div className="flex-grow border-t border-slate-700"></div>
+                </div>
+
+                <SocialLogin currentPath="signUp" selectedRole={selectedRole} />
             </div>
         </div>
     );

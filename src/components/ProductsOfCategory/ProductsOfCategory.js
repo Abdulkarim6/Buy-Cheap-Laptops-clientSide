@@ -20,7 +20,7 @@ const ProductsOfCategory = () => {
      }, [bookingProduct, srclocation, user, navigate]);
 
     return (
-        <div className='mx-auto'>
+        <div className='mx-auto py-5'>
             <h1 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">Search results</h1>
             <div className='grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-2 md:px-6'>
                 {
