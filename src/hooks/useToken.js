@@ -11,7 +11,7 @@ const useToken = (info) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/jwt?email=${email}`)
+      fetch(`https://cheap-laptop-server-side.vercel.app/jwt?email=${email}`)
         .then(async (res) => {
           const data = await res.json();
           if (!res.ok) {

@@ -33,7 +33,7 @@ const ReviewGetter = () => {
     return (
         <div className='my-3 flex justify-center items-center text-black bg-fixed rounded'  style={{backgroundImage : `url(https://i.ibb.co/WK62JgX/banner2.jpg)`, backgroundSize : "cover", backgroundPosition : 'center'}}>
             <div className='borderd my-5 md:my-6'>
-                <h4 className="text-xl lg:text-3xl font-bold">Please ! Share your experience about this site</h4>
+                <h4 className="text-base md:text-xl lg:text-3xl font-bold">Please ! Share your experience about this site</h4>
                 <form onSubmit={handleSubmit(handleFindUsersMessage)}>
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text text-black font-semibold text-base">Your Name</span></label>

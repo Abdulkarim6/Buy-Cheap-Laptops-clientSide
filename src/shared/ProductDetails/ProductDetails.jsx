@@ -69,7 +69,7 @@ const ProductDetails = () => {
     return (
         <section className='flex flex-col gap-3 px-5 lg:flex-row md:flex-row p-2'>
             <div className="card w-full md:w-3/5 lg:w-1/2 bg-slate-800 shadow-xl mb-2 p-3">
-                <figure className='bg-slate-300 mb-2'><img src={image} className='h-56' alt="" /></figure>
+                <figure className='bg-slate-300 mb-2'><img src={image} className='h-40 md:h-56' alt="" /></figure>
                 <h2 className="card-title text-xl lg:text-3xl">
                     {title}
                 </h2>

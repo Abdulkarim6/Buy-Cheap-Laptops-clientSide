@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
-import toast from 'react-hot-toast';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import useToken from '../../hooks/useToken';
 
@@ -39,7 +38,7 @@ const SignIn = () => {
 
 
     return (
-        <div className='min-h-[80vh] flex justify-center items-center px-4 my-6'>
+        <div className='flex justify-center items-center px-4 my-6'>
         <div className='w-full max-w-md border border-slate-700 bg-slate-800/90 shadow-2xl p-8 rounded-2xl text-slate-100 backdrop-blur-md'>
             
             <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-6">Login</h2>
