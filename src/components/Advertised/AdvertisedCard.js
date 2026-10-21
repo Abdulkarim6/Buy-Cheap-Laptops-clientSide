@@ -1,5 +1,4 @@
 import React from 'react';
-import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -7,14 +6,14 @@ AOS.init();
 
 const AdvertisedCard = ({ advertiseProduct }) => {
 
-    const { image, title, originalPrice,
-        recelPrice, sellerName, usedTime, _id } = advertiseProduct;
+    const { image, title,
+        recelPrice, _id } = advertiseProduct;
 
     return (
         <div data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1000">
-            <div className="card bg-slate-800 shadow-xl p-1" >
+            <div className="card bg-slate-800 shadow-xl p-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-500/10 border border-slate-700/80 hover:border-cyan-500/50" >
                 <figure className='bg-slate-300'><img src={image} className='h-36 md:h-64' alt="" /></figure>
                 <div className="card-body p-2">
                     <h2 className="card-title text-lg md:text-xl font-semibold">

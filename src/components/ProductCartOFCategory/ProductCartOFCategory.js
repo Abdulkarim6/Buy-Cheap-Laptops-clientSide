@@ -5,7 +5,7 @@ const ProductCartOfACategory = ({ product, setBookingProduct }) => {
     const { image, title, recelPrice, _id } = product;
 
     return (
-        <div className="card bg-slate-800 shadow-xl" >
+        <div className="card bg-slate-800 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-500/10 border border-slate-700/80 hover:border-cyan-500/50" >
             <figure className='bg-slate-300'><img src={image} className='h-32 md:h-64' alt="" /></figure>
             <div className="card-body p-1 md:p-3">
                 <h2 className="card-title text-sm md:text-lg font-semibold">
