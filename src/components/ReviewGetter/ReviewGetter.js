@@ -6,7 +6,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const ReviewGetter = () => {
     const { user } = useContext(AuthContext)
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, reset, formState: { errors }, handleSubmit } = useForm();
 
     const handleFindUsersMessage = data => {
         const message = {
@@ -26,6 +26,7 @@ const ReviewGetter = () => {
             .then(result => {
                 if (result.acknowledged) {
                     toast.success(`Thankyou for share your experience`);
+                    reset();
                 }
             })
     }
