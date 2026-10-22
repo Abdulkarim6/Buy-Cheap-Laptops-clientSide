@@ -13,7 +13,7 @@ import Home from "../../pages/Home/Home";
 import SignIn from "../../pages/SignIn/SignIn";
 import SignUP from "../../pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
+// import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import ProductsOfCategory from "../../components/ProductsOfCategory/ProductsOfCategory";
 

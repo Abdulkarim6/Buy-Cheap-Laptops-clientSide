@@ -49,7 +49,7 @@ const BookingForm = ({handleBooking, user, date, bookingProduct}) => {
             <input
               name="sellPrice"
               type="text"
-              value={`৳ ${recelPrice}`}
+              value={`${recelPrice}`}
               className="input w-full bg-slate-900/60 border border-slate-800 text-cyan-400 font-bold cursor-not-allowed rounded-lg text-sm"
               readOnly
             />

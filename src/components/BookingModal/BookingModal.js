@@ -4,7 +4,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import BookingForm from './BookingForm';
 
 const BookingModal = ({ bookingProduct, setBookingProduct }) => {
-    const {email, image } = bookingProduct;
+    const {_id, email, image } = bookingProduct;
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     const { user } = useContext(AuthContext);
@@ -21,6 +21,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct }) => {
         const location = form.location.value;
 
         const buyerBookingProduct = {
+            productId: _id,
             productName,
             productImage: image,
             price: sellPrice,

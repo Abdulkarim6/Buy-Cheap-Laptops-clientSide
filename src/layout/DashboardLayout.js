@@ -4,7 +4,6 @@ import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from '../Contexts/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
 import useSeller from '../hooks/useSeller';
-import Footer from '../shared/Footer/Footer';
 import Navbar from '../shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
@@ -122,7 +121,7 @@ const DashboardLayout = () => {
                 </aside>
 
                 {/* Main Dashboard Content Area */}
-                <main className="flex-1 w-full bg-slate-800/40 border border-slate-800 rounded-2xl p-4 md:p-8 backdrop-blur-md min-h-[70vh]">
+                <main className="flex-1 w-full bg-slate-800/40 border border-slate-800 rounded-2xl p-4 md:p-6 backdrop-blur-md min-h-[70vh]">
                     <Outlet />
                 </main>
             </div>

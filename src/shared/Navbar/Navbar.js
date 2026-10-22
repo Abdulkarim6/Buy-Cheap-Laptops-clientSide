@@ -149,9 +149,9 @@ const Navbar = () => {
             </div>  
 
             {/* Category search box for Small and Medium Devices */}
-            <div className='w-full flex lg:hidden items-center justify-center pt-1'>
+            {/* <div className='w-full flex lg:hidden items-center justify-center pt-1'>
                 {searchBoxContent} 
-            </div>
+            </div> */}
         </div>
     );
 };

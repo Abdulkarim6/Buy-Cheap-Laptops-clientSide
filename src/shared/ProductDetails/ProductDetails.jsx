@@ -7,7 +7,8 @@ import BookingForm from '../../components/BookingModal/BookingForm';
 
 const ProductDetails = () => {
     const ProductDetails = useLoaderData();
-    const { email, image, location, title, originalPrice, postDate,
+    console.log(ProductDetails);
+    const {_id, email, image, location, title, originalPrice, postDate,
         recelPrice, sellerName, usedTime, Phone, Condition, Description } = ProductDetails;
  
     const current = new Date();
@@ -35,6 +36,7 @@ const ProductDetails = () => {
         const location = form.location.value;
 
         const buyerBookingProduct = {
+            productId: _id,
             productName,
             productImage: image,
             price: sellPrice,
