@@ -1,108 +1,189 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { CheckBadgeIcon } from '@heroicons/react/24/solid';
+import { 
+    HiCheckBadge, 
+    HiOutlineMapPin, 
+    HiOutlinePhone, 
+    HiOutlineCalendar, 
+    HiOutlineClock, 
+    HiOutlineSparkles 
+} from 'react-icons/hi2';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import BookingForm from '../../components/BookingModal/BookingForm';
 
 const ProductDetails = () => {
-    const ProductDetails = useLoaderData();
-    console.log(ProductDetails);
-    const {_id, email, image, location, title, originalPrice, postDate,
-        recelPrice, sellerName, usedTime, Phone, Condition, Description } = ProductDetails;
- 
-    const current = new Date();
-    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+    const product = useLoaderData();
+    const {
+        _id, email: sellerEmail, image, location: sellerLocation, title: productTitle, originalPrice, postDate, recelPrice, resalePrice,
+        sellerName, usedTime, Phone, Condition, Description
+    } = product || {};
+
+    console.log(product);
+
+    const price = recelPrice || resalePrice;
+    const date = new Date().toLocaleDateString('en-GB');
     const { user } = useContext(AuthContext);
 
     const srcLocation = useLocation();
     const navigate = useNavigate();
 
-    const handleBooking = event => {
+    const handleBooking = (event) => {
         event.preventDefault();
 
+        // ১. লগইন চেক
         if (!user) {
             navigate("/signIn", { state: { from: srcLocation } });
             return;
         }
 
+        if (user?.email === sellerEmail) {
+            toast.error("You cannot book your own listed product!");
+            return;
+        }
+
         const form = event.target;
-        const userName = form.name.value;
+        const buyerName = form.name.value;
         const buyerEmail = form.email.value;
-        const date = form.date.value;
-        const productName = form.productName.value;
-        const sellPrice = form.sellPrice.value;
-        const phone = form.phone.value;
-        const location = form.location.value;
+        const bookingDate = form.date.value;
+        const buyerPhone = form.phone.value;
+        const buyerLocation = form.location.value;
 
         const buyerBookingProduct = {
             productId: _id,
-            productName,
+            productName: productTitle,
             productImage: image,
-            price: sellPrice,
-            sellerEmail: email,
-
-            name: userName,
+            price,
+            sellerEmail,
+            buyerName,
             buyerEmail,
-            phone,
-            bookingDate: date,
-            location
-        }
+            buyerPhone,
+            bookingDate,
+            buyerLocation
+        };
 
-
+        // ৩. JWT Authorization হেডারসহ এপিআই রিকোয়েস্ট
         fetch('https://cheap-laptop-server-side.vercel.app/buyerBookingProducts', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(buyerBookingProduct)
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 if (data.acknowledged) {
-                    toast.success('Your Booking Confirmed');
-                }
-                else {
-                    toast.error(data.message)
+                    toast.success('Your booking was confirmed successfully!');
+                    form.reset();
+                } else {
+                    toast.error(data.message || 'Failed to place booking');
                 }
             })
-    }
+            .catch(() => toast.error('Something went wrong. Please try again.'));
+    };
 
     return (
-        <section className='flex flex-col gap-3 px-5 lg:flex-row md:flex-row p-2'>
-            <div className="card w-full md:w-3/5 lg:w-1/2 bg-slate-800 shadow-xl mb-2 p-3">
-                <figure className='bg-slate-300 mb-2'><img src={image} className='h-40 md:h-56' alt="" /></figure>
-                <h2 className="card-title text-xl lg:text-3xl">
-                    {title}
-                </h2>
-                <div className="flex justify-between items-center">
-                    <div className='md:font-semibold'>
-                        <div className="flex justify-start text-base lg:text-xl">
-                            <div><p>Seller : {sellerName}</p></div>
-                            <div><CheckBadgeIcon className="h-6 w-6 text-blue-500"></CheckBadgeIcon></div>
+        <section className="w-full mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Left Column: Product Showcase & Details */}
+                <div className="lg:col-span-7 bg-slate-900/60 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 shadow-2xl space-y-6">
+                    
+                    {/* Image Preview Container */}
+                    <div className="relative w-full h-64 sm:h-80 md:h-96 bg-slate-950/60 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center group">
+                        <img
+                            src={image}
+                            alt={productTitle}
+                            className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <span className="absolute top-3 left-3 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-semibold text-xs px-3 py-1 rounded-full backdrop-blur-md">
+                            {Condition || "Used"}
+                        </span>
+                    </div>
+
+                    {/* Title & Seller Info */}
+                    <div className="space-y-3 pb-5 border-b border-slate-800/80">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-wide leading-tight">
+                            {productTitle}
+                        </h1>
+
+                        <div className="flex flex-wrap items-center gap-3 text-sm">
+                            <div className="flex items-center gap-1.5 bg-slate-800/80 px-3 py-1 rounded-lg border border-slate-700/60">
+                                <span className="text-slate-400">Seller:</span>
+                                <span className="font-semibold text-white">{sellerName || "Verified Seller"}</span>
+                                <HiCheckBadge className="w-4 h-4 text-blue-400" title="Verified Seller" />
+                            </div>
+
+                            <div className="flex items-center gap-1.5 text-slate-400 text-xs">
+                                <HiOutlineCalendar className="w-4 h-4 text-slate-500" />
+                                <span>Posted: {postDate || "Recently"}</span>
+                            </div>
                         </div>
-                        <strong><p>Sell Price : {recelPrice}</p></strong>
-                        <p>Original price : {originalPrice}</p>
-                        <p>used Time : {usedTime}</p>
                     </div>
-                    <div className='text-base md:text-lg md:font-semibold'>
-                        <p>Location : {location}</p>
-                        <p>Phone : {Phone}</p>
-                        <p>Post : {postDate}</p>
-                        <p>Condition : {Condition}</p>
+
+                    {/* Price Breakdown */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60">
+                        <div>
+                            <p className="text-xs text-slate-400 uppercase tracking-wider font-medium">Selling Price</p>
+                            <p className="text-xl sm:text-2xl font-extrabold text-cyan-400 mt-0.5">৳ {price}</p>
+                        </div>
+                        <div>
+                            <p className="text-xs text-slate-400 uppercase tracking-wider font-medium">Original Price</p>
+                            <p className="text-lg font-semibold text-red-400 line-through mt-1">৳ {originalPrice}</p>
+                        </div>
+                        <div>
+                            <p className="text-xs text-slate-400 uppercase tracking-wider font-medium">Used Duration</p>
+                            <p className="text-sm font-semibold text-slate-200 mt-1 flex items-center gap-1">
+                                <HiOutlineClock className="w-4 h-4 text-cyan-400" />
+                                {usedTime}
+                            </p>
+                        </div>
                     </div>
+
+                    {/* Specs / Meta Details */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div className="flex items-center gap-2 text-slate-300 bg-slate-800/40 p-3 rounded-lg border border-slate-800">
+                            <HiOutlineMapPin className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                            <span><strong className="text-white">Location:</strong> {sellerLocation}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300 bg-slate-800/40 p-3 rounded-lg border border-slate-800">
+                            <HiOutlinePhone className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                            <span><strong className="text-white">Contact:</strong> {Phone}</span>
+                        </div>
+                    </div>
+
+                    {/* Description */}
+                    {Description && (
+                        <div className="pt-2">
+                            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2 flex items-center gap-1.5">
+                                <HiOutlineSparkles className="w-4 h-4 text-cyan-400" />
+                                Description & Details
+                            </h3>
+                            <p className="text-slate-400 text-sm leading-relaxed bg-slate-950/30 p-4 rounded-xl border border-slate-800/50 whitespace-pre-line">
+                                {Description}
+                            </p>
+                        </div>
+                    )}
                 </div>
-                <p className='text-base lg:text-xl mt-1'><strong>Note : </strong>{Description}</p>
-            </div>
 
+                {/* Right Column: Sticky Booking Form */}
+                <div className="lg:col-span-5 bg-slate-900/60 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 shadow-2xl sticky top-24">
+                    <h2 className="text-xl font-bold text-white mb-1">
+                        Book This Laptop
+                    </h2>
+                    <p className="text-slate-400 text-xs mb-6 pb-4 border-b border-slate-800">
+                        Fill out your details below to confirm your purchase booking.
+                    </p>
 
-            <div className="w-full md:w-2/5 lg:w-1/2 px-2 pt-0 md:p-2">
-                <BookingForm
-                 bookingProduct={ProductDetails}
-                 handleBooking={handleBooking}
-                 user={user}
-                 date={date}
-                />
+                    <BookingForm
+                        bookingProduct={product}
+                        handleBooking={handleBooking}
+                        user={user}
+                        date={date}
+                    />
+                </div>
+
             </div>
         </section>
     );
