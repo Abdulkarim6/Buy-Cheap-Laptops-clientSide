@@ -1,9 +1,9 @@
 import React from 'react';
+import ReactDOM from "react-dom";
 
 const ConfirmationModal = ({ title, message, successDeleteButton, closeModal, successDeleteAction, modalData }) => {
-    return (
-        /* modal-open ক্লাস যোগ করায় রিয়্যাক্ট স্টেট ট্রু হলেই এটি সরাসরি ভিজিবল হবে */
-        <div className="modal modal-open bg-slate-950/80 backdrop-blur-sm">
+    return ReactDOM.createPortal(
+       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm">
             <div className="modal-box bg-slate-900 border border-slate-800 text-slate-100 rounded-2xl p-6">
                 <h3 className="font-bold text-xl text-white">{title}</h3>
                 <p className="py-4 text-slate-300 text-sm leading-relaxed">{message}</p>
@@ -25,7 +25,8 @@ const ConfirmationModal = ({ title, message, successDeleteButton, closeModal, su
                     </button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 
