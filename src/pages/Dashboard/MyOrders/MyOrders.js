@@ -96,7 +96,7 @@ const MyOrders = () => {
                                                                 className="w-full h-full object-cover"
                                                             />
                                                         </div>
-                                                        <p className="font-semibold text-white">
+                                                        <p className="font-normal md:font-semibold text-white">
                                                             <Link to={`/ProductDetails/${item?.productId}`}><span className='line-clamp-1 md:line-clamp-none underline transition-colors hover:text-cyan-400'>{item.productName}</span></Link>
                                                             <span className='md:hidden text-cyan-400 whitespace-nowrap text-xs'>৳ {item.price}</span>
                                                         </p>
