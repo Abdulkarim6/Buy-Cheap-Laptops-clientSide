@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useContext, useEffect, useState } from 'react';
-import AllProductCart from './AllProductCart';
 import BookingModal from '../BookingModal/BookingModal';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ProductCart from '../../shared/ProductCart/ProductCart';
 
 const AllProducts = () => {
       const [bookingProduct, setBookingProduct] = useState(null);
@@ -34,14 +34,14 @@ const AllProducts = () => {
 
     return (
         <div className='mx-auto'>
-                   <h2 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">Used Laptops</h2>
+                   <h2 className="mt-5 mb-2 rounded-md text-xl md:text-4xl text-center font-serif font-semibold">All Laptops</h2>
                    <div className='grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-0 lg:px-8'>
                         {
-                            allproducts.map(product => <AllProductCart
+                            allproducts.map(product => <ProductCart
                                 key={product._id}
                                 setBookingProduct={setBookingProduct}
                                 product={product}
-                            ></AllProductCart>)
+                            />)
                         }
                     </div>
                     {
